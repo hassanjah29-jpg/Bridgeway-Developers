@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // Relative asset paths so the built site works at any host path
+  // (root domain, *.pages.dev, or a subdirectory).
+  base: './',
   plugins: [react()],
   server: {
     host: true,
