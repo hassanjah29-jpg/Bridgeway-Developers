@@ -8,9 +8,9 @@
   var loader = document.getElementById('loader');
   if (loader) {
     document.body.style.overflow = 'hidden';
-    setTimeout(function () { document.body.style.overflow = ''; }, 3400);
+    setTimeout(function () { document.body.style.overflow = ''; }, 3900);
     // remove from the DOM after it has faded out
-    setTimeout(function () { if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 4200);
+    setTimeout(function () { if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 4700);
   }
 
   /* ---------- Navbar shadow + back-to-top on scroll ---------- */

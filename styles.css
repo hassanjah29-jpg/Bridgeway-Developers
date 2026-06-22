@@ -66,9 +66,10 @@ a { text-decoration: none; color: inherit; }
 }
 .navbar.scrolled { box-shadow: 0 6px 24px -16px rgba(0,0,0,0.3); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 1.5rem; }
-.logo { display: flex; align-items: baseline; }
+.logo { display: flex; align-items: center; gap: 0.7rem; }
+.nav-logo { height: 44px; width: auto; flex-shrink: 0; }
+.logo-word { font-family: var(--display); font-weight: 600; font-size: 1.15rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
 .logo-text { font-family: var(--display); font-weight: 600; font-size: 1.3rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
-.logo-dev { font-weight: 300; font-size: 0.92em; letter-spacing: 0.2em; color: var(--ink-soft); margin-left: 0.35em; }
 .nav-links { display: flex; align-items: center; gap: 2rem; }
 .nav-links > a {
   font-family: var(--display); font-size: 0.78rem; font-weight: 500;
@@ -254,7 +255,8 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 560px) {
   .container { padding: 0 1.25rem; }
   .logo-text { font-size: 1rem; letter-spacing: 0.1em; }
-  .logo-dev { letter-spacing: 0.12em; }
+  .nav-logo { height: 36px; }
+  .logo-word { font-size: 0.92rem; letter-spacing: 0.1em; }
   .section { padding: 4.5rem 0; }
   .svc-grid, .why-grid, .steps { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
@@ -275,22 +277,27 @@ a { text-decoration: none; color: inherit; }
 .loader {
   position: fixed; inset: 0; z-index: 2000;
   display: flex; align-items: center; justify-content: center;
-  background: radial-gradient(circle at 50% 48%, #14233b 0%, #0a1526 45%, #060d18 100%);
-  animation: loaderHide 0.7s ease 2.9s forwards;
+  background-color: #0a1526;
+  background-image: radial-gradient(circle at 50% 48%, #14233b 0%, #0a1526 45%, #060d18 100%);
+  animation: loaderHide 0.7s ease 3.4s forwards;
 }
-.loader-logo {
-  width: clamp(230px, 42vw, 380px); height: auto;
-  opacity: 0; transform: scale(0.92);
-  animation: loaderLogoIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
-  /* fade the square edges into the backdrop for a seamless look */
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 80%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 80%);
-}
+.loader-svg { width: clamp(230px, 44vw, 380px); height: auto; filter: drop-shadow(0 6px 30px rgba(212, 175, 55, 0.22)); }
+/* draw the monogram strokes */
+.loader-svg .lp { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bwDraw 1.7s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+.loader-svg g path:nth-child(1) { animation-delay: 0.10s; }
+.loader-svg g path:nth-child(2) { animation-delay: 0.35s; }
+.loader-svg g path:nth-child(3) { animation-delay: 0.55s; }
+.loader-svg g path:nth-child(4) { animation-delay: 0.20s; }
+.loader-svg g path:nth-child(5) { animation-delay: 0.75s; }
+/* reveal the wordmark after the monogram is drawn */
+.loader-svg .lt { opacity: 0; animation: ltReveal 0.9s ease 1.7s forwards; }
 
-@keyframes loaderLogoIn { to { opacity: 1; transform: scale(1); } }
+@keyframes bwDraw { to { stroke-dashoffset: 0; } }
+@keyframes ltReveal { to { opacity: 1; } }
 @keyframes loaderHide { to { opacity: 0; visibility: hidden; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .loader-logo { animation: none; opacity: 1; transform: none; }
+  .loader-svg .lp { animation: none; stroke-dashoffset: 0; }
+  .loader-svg .lt { animation: none; opacity: 1; }
   .loader { animation: loaderHide 0.5s ease 2.2s forwards; }
 }
