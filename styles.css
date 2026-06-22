@@ -66,10 +66,9 @@ a { text-decoration: none; color: inherit; }
 }
 .navbar.scrolled { box-shadow: 0 6px 24px -16px rgba(0,0,0,0.3); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 1.5rem; }
-.logo { display: flex; align-items: center; gap: 0.6rem; color: var(--navy); }
-.logo-mark { width: 42px; height: 42px; background: var(--navy-dark); border-radius: 8px; display: grid; place-items: center; }
-.logo-mark svg { width: 30px; height: auto; }
-.logo-text { font-family: var(--display); font-weight: 600; font-size: 1.4rem; letter-spacing: 0.18em; color: var(--ink); }
+.logo { display: flex; align-items: baseline; }
+.logo-text { font-family: var(--display); font-weight: 600; font-size: 1.3rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.logo-dev { font-weight: 300; font-size: 0.92em; letter-spacing: 0.2em; color: var(--ink-soft); margin-left: 0.35em; }
 .nav-links { display: flex; align-items: center; gap: 2rem; }
 .nav-links > a {
   font-family: var(--display); font-size: 0.78rem; font-weight: 500;
@@ -254,6 +253,8 @@ a { text-decoration: none; color: inherit; }
 }
 @media (max-width: 560px) {
   .container { padding: 0 1.25rem; }
+  .logo-text { font-size: 1rem; letter-spacing: 0.1em; }
+  .logo-dev { letter-spacing: 0.12em; }
   .section { padding: 4.5rem 0; }
   .svc-grid, .why-grid, .steps { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
