@@ -17,17 +17,56 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <!-- Skip the intro loader if it has already played this session (prevents flash) -->
+    <script>
+      try { if (sessionStorage.getItem('bwLoaded')) document.documentElement.classList.add('preloaded'); } catch (e) {}
+    </script>
   </head>
   <body>
+    <!-- ============ INTRO LOADER ============ -->
+    <div class="loader" id="loader" role="status" aria-label="Loading Bridgeway Developers">
+      <div class="loader-inner">
+        <svg class="loader-mono" viewBox="0 0 240 150" width="200" aria-hidden="true">
+          <defs>
+            <linearGradient id="bwGoldLoad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f7e98e" />
+              <stop offset="0.5" stop-color="#e6c558" />
+              <stop offset="1" stop-color="#c79a3a" />
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke="url(#bwGoldLoad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+            <path class="dpath" pathLength="1" d="M58 30 V120" />
+            <path class="dpath" pathLength="1" d="M58 33 H96 a22 22 0 0 1 0 42 H58" />
+            <path class="dpath" pathLength="1" d="M58 75 H102 a23 23 0 0 1 0 44 H58" />
+            <path class="dpath" pathLength="1" d="M28 96 C92 56 132 70 208 33" />
+            <path class="dpath" pathLength="1" d="M120 52 L140 119 L165 72 L185 119 L206 52" />
+          </g>
+        </svg>
+        <div class="loader-name">Bridgeway Developers</div>
+        <div class="loader-bar"><span></span></div>
+      </div>
+    </div>
+
     <!-- ============ NAVBAR ============ -->
     <header class="navbar" id="navbar">
       <div class="container nav-inner">
         <a href="#home" class="logo" aria-label="Bridgeway Developers home">
           <span class="logo-mark" aria-hidden="true">
-            <svg viewBox="0 0 64 64" width="24" height="24">
-              <path d="M16 44V20l16-8 16 8v24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M24 44V30h16v14" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M32 44V30" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <svg viewBox="0 0 240 150" width="30">
+              <defs>
+                <linearGradient id="bwGoldNav" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#f7e98e" />
+                  <stop offset="0.5" stop-color="#e6c558" />
+                  <stop offset="1" stop-color="#c79a3a" />
+                </linearGradient>
+              </defs>
+              <g fill="none" stroke="url(#bwGoldNav)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M58 30 V120" />
+                <path d="M58 33 H96 a22 22 0 0 1 0 42 H58" />
+                <path d="M58 75 H102 a23 23 0 0 1 0 44 H58" />
+                <path d="M28 96 C92 56 132 70 208 33" />
+                <path d="M120 52 L140 119 L165 72 L185 119 L206 52" />
+              </g>
             </svg>
           </span>
           <span class="logo-text">BRIDGEWAY</span>

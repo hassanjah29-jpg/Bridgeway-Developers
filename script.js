@@ -4,6 +4,22 @@
 (function () {
   'use strict';
 
+  /* ---------- Intro loader (plays once per browser session) ---------- */
+  var loader = document.getElementById('loader');
+  if (loader) {
+    var seen = false;
+    try { seen = !!sessionStorage.getItem('bwLoaded'); } catch (e) {}
+    if (seen) {
+      loader.remove();
+    } else {
+      try { sessionStorage.setItem('bwLoaded', '1'); } catch (e) {}
+      document.body.style.overflow = 'hidden';
+      setTimeout(function () { document.body.style.overflow = ''; }, 3400);
+      // remove from the DOM after it has faded out
+      setTimeout(function () { if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 4200);
+    }
+  }
+
   /* ---------- Navbar shadow + back-to-top on scroll ---------- */
   var navbar = document.getElementById('navbar');
   var backTop = document.getElementById('backToTop');
