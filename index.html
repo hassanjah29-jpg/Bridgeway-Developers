@@ -8,12 +8,12 @@
       name="description"
       content="Bridgeway Developers — a Lahore-based real estate development and construction company building premium apartments, residential and commercial projects."
     />
-    <meta name="theme-color" content="#0a1622" />
+    <meta name="theme-color" content="#16273d" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -24,169 +24,163 @@
       <div class="container nav-inner">
         <a href="#home" class="logo" aria-label="Bridgeway Developers home">
           <span class="logo-mark" aria-hidden="true">
-            <svg viewBox="0 0 64 64" width="26" height="26">
-              <path d="M16 44V20l16-8 16 8v24" fill="none" stroke="#d4a23f" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M24 44V30h16v14" fill="none" stroke="#d4a23f" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-              <path d="M32 44V30" stroke="#d4a23f" stroke-width="3.5" stroke-linecap="round"/>
+            <svg viewBox="0 0 64 64" width="24" height="24">
+              <path d="M16 44V20l16-8 16 8v24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M24 44V30h16v14" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M32 44V30" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
             </svg>
           </span>
-          <span class="logo-text">
-            <strong>Bridgeway</strong>
-            <em>Developers</em>
-          </span>
+          <span class="logo-text">BRIDGEWAY</span>
         </a>
 
         <nav class="nav-links" id="navLinks" aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
+          <a href="#about">About Us</a>
           <a href="#projects">Projects</a>
+          <a href="#services">Services</a>
           <a href="#why-us">Why Us</a>
           <a href="#process">Process</a>
-          <a href="#contact">Contact</a>
-          <a href="#contact" class="btn btn-gold nav-cta">Get a Quote</a>
         </nav>
 
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+        <div class="nav-right">
+          <span class="nav-lang">ENG ▾</span>
+          <a href="tel:+923001234567" class="nav-icon" aria-label="Call us">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          </a>
+          <a href="#contact" class="btn-navy nav-cta">Get In Touch</a>
+          <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
       </div>
     </header>
 
     <main>
       <!-- ============ HERO ============ -->
       <section class="hero" id="home">
-        <video class="hero-video" autoplay muted loop playsinline preload="auto"
-          poster="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80">
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"
+          poster="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80">
           <source src="hero-video.mp4" type="video/mp4" />
         </video>
         <div class="hero-overlay" aria-hidden="true"></div>
-        <div class="container hero-inner">
-          <span class="badge reveal">● Lahore-Based Real Estate Developers</span>
-          <h1 class="reveal">
-            Building Lahore's Future,
-            <span class="text-gradient">One Development at a Time</span>
-          </h1>
-          <p class="hero-sub reveal">
-            Bridgeway Developers crafts premium apartments, residential communities and commercial
-            landmarks — combining modern architecture with quality construction and reliable delivery
-            you can invest in with confidence.
-          </p>
-          <div class="hero-actions reveal">
-            <a href="#projects" class="btn btn-gold">View Projects →</a>
-            <a href="#contact" class="btn btn-outline">Contact Us</a>
+
+        <div class="hero-content">
+          <span class="hero-eyebrow">Bridgeway Developers</span>
+          <h1 class="hero-title">Building Lahore's Future</h1>
+          <p class="hero-tagline">One Development at a Time</p>
+        </div>
+
+        <form class="search-bar" id="searchBar" aria-label="Property search">
+          <div class="search-field">
+            <label>Property Type</label>
+            <select>
+              <option>Apartment</option><option>Villa / House</option><option>Commercial</option><option>Plot</option>
+            </select>
           </div>
-          <ul class="hero-highlights reveal">
-            <li><span class="tick">✓</span> 15+ years of trusted delivery</li>
-            <li><span class="tick">✓</span> Premium Lahore locations</li>
-            <li><span class="tick">✓</span> Quality-certified construction</li>
-          </ul>
+          <div class="search-field">
+            <label>Bedrooms</label>
+            <select><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+          </div>
+          <div class="search-field">
+            <label>Price Range</label>
+            <select><option>Any</option><option>Up to 1 Cr</option><option>1 – 3 Cr</option><option>3 Cr+</option></select>
+          </div>
+          <div class="search-field">
+            <label>Community</label>
+            <select><option>DHA</option><option>Bahria Town</option><option>Gulberg</option><option>Johar Town</option></select>
+          </div>
+          <button type="submit" class="btn-navy search-btn">Search Properties</button>
+        </form>
+
+        <a href="#about" class="hero-scroll" aria-label="Scroll down">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+        <button class="hero-mute" id="heroMute" aria-label="Toggle sound">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+      </section>
+
+      <!-- ============ INTRO / ABOUT ============ -->
+      <section class="section intro" id="about">
+        <div class="container">
+          <p class="intro-lead reveal">
+            As a leading developer in Lahore, Bridgeway Developers defines the skyline and the
+            standard for premium living. We deliver an exceptional portfolio of apartments, homes and
+            commercial landmarks across the city's most sought-after districts — from DHA and Bahria
+            Town to Gulberg and Johar Town.
+          </p>
+          <p class="intro-lead reveal">
+            Beyond delivering an unparalleled lifestyle, Bridgeway offers a secure path for investment
+            in Lahore real estate. Our developments combine architectural excellence with quality
+            construction and reliable delivery, ensuring strong long-term value with the region's most
+            trusted name.
+          </p>
+
+          <div class="intro-stats reveal">
+            <div class="istat"><span class="istat-num" data-target="45" data-suffix="+">0</span><span class="istat-label">Projects Planned</span></div>
+            <div class="istat"><span class="istat-num" data-target="15" data-suffix="+">0</span><span class="istat-label">Years of Experience</span></div>
+            <div class="istat"><span class="istat-num" data-target="1200" data-suffix="+">0</span><span class="istat-label">Apartments Developed</span></div>
+            <div class="istat"><span class="istat-num" data-target="980" data-suffix="+">0</span><span class="istat-label">Satisfied Clients</span></div>
+          </div>
         </div>
       </section>
 
-      <!-- ============ ABOUT ============ -->
-      <section class="section about" id="about">
-        <div class="container about-grid">
-          <div class="about-media reveal">
-            <img
-              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1100&q=80"
-              alt="Bridgeway Developers construction site in Lahore" loading="lazy" />
-            <div class="exp-badge">
-              <span class="exp-num">15+</span>
-              <span>Years building<br />across Lahore</span>
+      <!-- ============ FEATURED PROJECTS (carousel) ============ -->
+      <section class="section projects" id="projects">
+        <div class="container">
+          <div class="label reveal">Communities <span class="label-line"></span></div>
+          <div class="section-bar reveal">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="carousel-nav">
+              <button class="carousel-arrow" id="prevProj" aria-label="Previous">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button class="carousel-arrow" id="nextProj" aria-label="Next">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
             </div>
           </div>
-          <div class="about-content">
-            <span class="eyebrow reveal">— About Bridgeway Developers</span>
-            <h2 class="section-title reveal">A Lahore developer built on trust, quality and vision</h2>
-            <p class="reveal">
-              Bridgeway Developers is a Lahore-based real estate development and construction firm
-              specialising in modern buildings, apartment projects and residential and commercial
-              developments. We turn prime land into landmark communities — guided by precise planning,
-              premium construction and an unwavering commitment to delivering on our promises.
-            </p>
-            <p class="reveal muted">
-              From first concept to final handover, our focus stays on quality, transparency and
-              long-term value — so every home we build and every investment our clients make stands
-              the test of time.
-            </p>
-            <div class="pillars reveal">
-              <div class="pillar"><span class="tick-box">✓</span><div><h3>Quality First</h3><p>Premium materials and certified engineering on every build.</p></div></div>
-              <div class="pillar"><span class="tick-box">✓</span><div><h3>Timely Delivery</h3><p>Disciplined scheduling that respects your time and capital.</p></div></div>
-              <div class="pillar"><span class="tick-box">✓</span><div><h3>Smart Planning</h3><p>Thoughtful master-planning for lasting, liveable communities.</p></div></div>
-              <div class="pillar"><span class="tick-box">✓</span><div><h3>Long-Term Value</h3><p>Developments designed to appreciate for years to come.</p></div></div>
-            </div>
-            <a href="#projects" class="btn btn-navy reveal">Explore Our Work →</a>
-          </div>
+        </div>
+
+        <div class="carousel" id="projCarousel">
+          <article class="slide">
+            <div class="slide-img"><img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=80" alt="Bridgeway Heights" loading="lazy" /><span class="slide-status">Under Construction</span></div>
+            <div class="slide-body"><span class="slide-type">Apartments · DHA Phase 6</span><h3>Bridgeway Heights</h3><p>A 14-storey luxury apartment tower with smart-home living and panoramic city views.</p><a href="#contact" class="slide-link">Enquire →</a></div>
+          </article>
+          <article class="slide">
+            <div class="slide-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80" alt="Bridgeway Residences" loading="lazy" /><span class="slide-status">Now Selling</span></div>
+            <div class="slide-body"><span class="slide-type">Residential · Bahria Town</span><h3>Bridgeway Residences</h3><p>An exclusive gated community of contemporary family homes around landscaped courtyards.</p><a href="#contact" class="slide-link">Enquire →</a></div>
+          </article>
+          <article class="slide">
+            <div class="slide-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80" alt="Bridgeway Commercial Plaza" loading="lazy" /><span class="slide-status">Planning</span></div>
+            <div class="slide-body"><span class="slide-type">Commercial · Gulberg III</span><h3>Bridgeway Commercial Plaza</h3><p>A flagship mixed-use plaza with premium retail, corporate offices and structured parking.</p><a href="#contact" class="slide-link">Enquire →</a></div>
+          </article>
+          <article class="slide">
+            <div class="slide-img"><img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=900&q=80" alt="Bridgeway Skyline" loading="lazy" /><span class="slide-status">Now Selling</span></div>
+            <div class="slide-body"><span class="slide-type">Apartments · Johar Town</span><h3>Bridgeway Skyline</h3><p>Mid-rise smart apartments designed for young professionals and growing families.</p><a href="#contact" class="slide-link">Enquire →</a></div>
+          </article>
+          <article class="slide">
+            <div class="slide-img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80" alt="Bridgeway Garden Homes" loading="lazy" /><span class="slide-status">Under Construction</span></div>
+            <div class="slide-body"><span class="slide-type">Residential · Lake City</span><h3>Bridgeway Garden Homes</h3><p>Elegant villas with private gardens in a serene, master-planned neighbourhood.</p><a href="#contact" class="slide-link">Enquire →</a></div>
+          </article>
+          <article class="slide">
+            <div class="slide-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80" alt="Bridgeway Business Hub" loading="lazy" /><span class="slide-status">Planning</span></div>
+            <div class="slide-body"><span class="slide-type">Commercial · Model Town</span><h3>Bridgeway Business Hub</h3><p>A modern corporate address offering grade-A office floors and conference facilities.</p><a href="#contact" class="slide-link">Enquire →</a></div>
+          </article>
         </div>
       </section>
 
       <!-- ============ SERVICES ============ -->
       <section class="section services" id="services">
         <div class="container">
-          <div class="section-head">
-            <div class="reveal">
-              <span class="eyebrow">— What We Do</span>
-              <h2 class="section-title">Comprehensive development &amp; construction services</h2>
-              <p class="lead">A full spectrum of capabilities under one trusted Lahore developer — from raw land to finished, move-in ready landmarks.</p>
-            </div>
-            <a href="#contact" class="btn btn-navy reveal">Discuss Your Project →</a>
-          </div>
-          <div class="grid-3">
-            <article class="card reveal"><span class="card-icon">🏢</span><h3>Real Estate Development</h3><p>End-to-end development of land into high-value residential and commercial communities, from acquisition to handover.</p></article>
-            <article class="card reveal"><span class="card-icon">🏬</span><h3>Apartment Construction</h3><p>Modern, structurally sound apartment complexes engineered for comfort, durability and long-term investment value.</p></article>
-            <article class="card reveal"><span class="card-icon">🏠</span><h3>Residential Projects</h3><p>Thoughtfully planned homes and gated communities that balance contemporary design with everyday liveability.</p></article>
-            <article class="card reveal"><span class="card-icon">🏙️</span><h3>Commercial Buildings</h3><p>Premium retail, office and mixed-use developments built to elevate business presence in prime Lahore locations.</p></article>
-            <article class="card reveal"><span class="card-icon">📐</span><h3>Project Planning &amp; Execution</h3><p>Detailed feasibility, scheduling and budgeting that keep every project on time, on budget and on standard.</p></article>
-            <article class="card reveal"><span class="card-icon">🛠️</span><h3>Construction Management</h3><p>Hands-on supervision, quality control and vendor coordination across every phase of the build cycle.</p></article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ PROJECTS ============ -->
-      <section class="section projects" id="projects">
-        <div class="container">
-          <div class="reveal center">
-            <span class="eyebrow">— Featured Projects</span>
-            <h2 class="section-title light">Developments shaping the Lahore skyline</h2>
-            <p class="lead light-muted">A selection of our residential, commercial and apartment projects — each delivered with the quality and care Bridgeway is known for.</p>
-          </div>
-
-          <div class="filters reveal" id="filters">
-            <button class="filter active" data-filter="all">All</button>
-            <button class="filter" data-filter="Residential">Residential</button>
-            <button class="filter" data-filter="Commercial">Commercial</button>
-            <button class="filter" data-filter="Apartments">Apartments</button>
-          </div>
-
-          <div class="grid-3" id="projectGrid">
-            <article class="project reveal" data-category="Apartments">
-              <div class="project-img"><img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80" alt="Bridgeway Heights" loading="lazy" /><span class="tag type">Apartments</span><span class="tag status status-build">Under Construction</span></div>
-              <div class="project-body"><h3>Bridgeway Heights</h3><p class="loc">📍 DHA Phase 6, Lahore</p><p>A 14-storey luxury apartment tower with smart-home living and panoramic city views.</p><a href="#contact" class="link-gold">Enquire about this project →</a></div>
-            </article>
-            <article class="project reveal" data-category="Residential">
-              <div class="project-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80" alt="Bridgeway Residences" loading="lazy" /><span class="tag type">Residential</span><span class="tag status status-sell">Now Selling</span></div>
-              <div class="project-body"><h3>Bridgeway Residences</h3><p class="loc">📍 Bahria Town, Lahore</p><p>An exclusive gated community of contemporary family homes set around landscaped courtyards.</p><a href="#contact" class="link-gold">Enquire about this project →</a></div>
-            </article>
-            <article class="project reveal" data-category="Commercial">
-              <div class="project-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Bridgeway Commercial Plaza" loading="lazy" /><span class="tag type">Commercial</span><span class="tag status status-plan">Planning</span></div>
-              <div class="project-body"><h3>Bridgeway Commercial Plaza</h3><p class="loc">📍 Gulberg III, Lahore</p><p>A flagship mixed-use plaza with premium retail, corporate offices and structured parking.</p><a href="#contact" class="link-gold">Enquire about this project →</a></div>
-            </article>
-            <article class="project reveal" data-category="Apartments">
-              <div class="project-img"><img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80" alt="Bridgeway Skyline" loading="lazy" /><span class="tag type">Apartments</span><span class="tag status status-sell">Now Selling</span></div>
-              <div class="project-body"><h3>Bridgeway Skyline</h3><p class="loc">📍 Johar Town, Lahore</p><p>Mid-rise smart apartments designed for young professionals and growing families.</p><a href="#contact" class="link-gold">Enquire about this project →</a></div>
-            </article>
-            <article class="project reveal" data-category="Residential">
-              <div class="project-img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80" alt="Bridgeway Garden Homes" loading="lazy" /><span class="tag type">Residential</span><span class="tag status status-build">Under Construction</span></div>
-              <div class="project-body"><h3>Bridgeway Garden Homes</h3><p class="loc">📍 Lake City, Lahore</p><p>Elegant villas with private gardens in a serene, master-planned neighbourhood.</p><a href="#contact" class="link-gold">Enquire about this project →</a></div>
-            </article>
-            <article class="project reveal" data-category="Commercial">
-              <div class="project-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Bridgeway Business Hub" loading="lazy" /><span class="tag type">Commercial</span><span class="tag status status-plan">Planning</span></div>
-              <div class="project-body"><h3>Bridgeway Business Hub</h3><p class="loc">📍 Model Town, Lahore</p><p>A modern corporate address offering grade-A office floors and conference facilities.</p><a href="#contact" class="link-gold">Enquire about this project →</a></div>
-            </article>
-          </div>
-
-          <div class="center reveal" style="margin-top: 3rem">
-            <a href="#contact" class="btn btn-gold">Request the Full Project Portfolio →</a>
+          <div class="label reveal">What We Do <span class="label-line"></span></div>
+          <h2 class="section-title reveal">Our Expertise</h2>
+          <div class="svc-grid">
+            <article class="svc reveal"><span class="svc-no">01</span><h3>Real Estate Development</h3><p>End-to-end development of land into high-value residential and commercial communities.</p></article>
+            <article class="svc reveal"><span class="svc-no">02</span><h3>Apartment Construction</h3><p>Modern, structurally sound apartment complexes engineered for comfort and durability.</p></article>
+            <article class="svc reveal"><span class="svc-no">03</span><h3>Residential Projects</h3><p>Thoughtfully planned homes and gated communities balancing design with liveability.</p></article>
+            <article class="svc reveal"><span class="svc-no">04</span><h3>Commercial Buildings</h3><p>Premium retail, office and mixed-use developments in prime Lahore locations.</p></article>
+            <article class="svc reveal"><span class="svc-no">05</span><h3>Planning &amp; Execution</h3><p>Detailed feasibility, scheduling and budgeting that keep every project on standard.</p></article>
+            <article class="svc reveal"><span class="svc-no">06</span><h3>Construction Management</h3><p>Hands-on supervision and quality control across every phase of the build cycle.</p></article>
           </div>
         </div>
       </section>
@@ -194,18 +188,15 @@
       <!-- ============ WHY CHOOSE US ============ -->
       <section class="section why-us" id="why-us">
         <div class="container">
-          <div class="reveal center">
-            <span class="eyebrow">— Why Choose Us</span>
-            <h2 class="section-title">The Bridgeway difference investors trust</h2>
-            <p class="lead">We pair local Lahore expertise with disciplined execution and a genuinely investor-focused mindset — the reasons clients keep building with us.</p>
-          </div>
-          <div class="grid-3">
-            <div class="why-card reveal"><span class="why-icon">🗺️</span><div><h3>Lahore Market Knowledge</h3><p>Deep, local insight into the city's most promising locations and emerging investment corridors.</p></div></div>
-            <div class="why-card reveal"><span class="why-icon">🛡️</span><div><h3>Quality Construction</h3><p>Premium materials, certified engineering and rigorous standards on every single project.</p></div></div>
-            <div class="why-card reveal"><span class="why-icon">👁️</span><div><h3>Transparent Process</h3><p>Clear pricing, honest timelines and open communication from first meeting to final handover.</p></div></div>
-            <div class="why-card reveal"><span class="why-icon">🧭</span><div><h3>Modern Architecture</h3><p>Forward-looking design that blends aesthetics, functionality and lasting value.</p></div></div>
-            <div class="why-card reveal"><span class="why-icon">⏱️</span><div><h3>Reliable Delivery</h3><p>A disciplined track record of completing developments on schedule and to specification.</p></div></div>
-            <div class="why-card reveal"><span class="why-icon">📈</span><div><h3>Investor-Focused</h3><p>Developments structured to protect capital and deliver strong, sustainable returns.</p></div></div>
+          <div class="label reveal">Why Bridgeway <span class="label-line"></span></div>
+          <h2 class="section-title reveal">The Difference Investors Trust</h2>
+          <div class="why-grid">
+            <div class="why reveal"><h3>Lahore Market Knowledge</h3><p>Deep, local insight into the city's most promising locations and emerging corridors.</p></div>
+            <div class="why reveal"><h3>Quality Construction</h3><p>Premium materials, certified engineering and rigorous standards on every project.</p></div>
+            <div class="why reveal"><h3>Transparent Process</h3><p>Clear pricing, honest timelines and open communication from first meeting to handover.</p></div>
+            <div class="why reveal"><h3>Modern Architecture</h3><p>Forward-looking design that blends aesthetics, functionality and lasting value.</p></div>
+            <div class="why reveal"><h3>Reliable Delivery</h3><p>A disciplined record of completing developments on schedule and to specification.</p></div>
+            <div class="why reveal"><h3>Investor-Focused</h3><p>Developments structured to protect capital and deliver strong, sustainable returns.</p></div>
           </div>
         </div>
       </section>
@@ -213,94 +204,68 @@
       <!-- ============ PROCESS ============ -->
       <section class="section process" id="process">
         <div class="container">
-          <div class="reveal center">
-            <span class="eyebrow">— Our Process</span>
-            <h2 class="section-title light">From site to handover — a proven five-step path</h2>
-            <p class="lead light-muted">A structured, transparent development process that keeps every project predictable, accountable and on standard.</p>
-          </div>
+          <div class="label reveal">Our Process <span class="label-line"></span></div>
+          <h2 class="section-title reveal">From Site to Handover</h2>
           <div class="steps">
-            <div class="step reveal"><span class="step-num">01</span><h3>Site Planning</h3><p>Location analysis, feasibility studies and master planning to maximise every project's potential.</p></div>
-            <div class="step reveal"><span class="step-num">02</span><h3>Design &amp; Architecture</h3><p>Detailed architectural design and engineering that balance beauty, safety and efficiency.</p></div>
-            <div class="step reveal"><span class="step-num">03</span><h3>Construction</h3><p>Skilled execution using premium materials and modern construction methods.</p></div>
-            <div class="step reveal"><span class="step-num">04</span><h3>Quality Inspection</h3><p>Multi-stage quality assurance and structural checks at every milestone.</p></div>
-            <div class="step reveal"><span class="step-num">05</span><h3>Handover</h3><p>A seamless, fully documented handover of a finished, move-in ready development.</p></div>
+            <div class="step reveal"><span class="step-num">01</span><h3>Site Planning</h3><p>Location analysis, feasibility studies and master planning.</p></div>
+            <div class="step reveal"><span class="step-num">02</span><h3>Design &amp; Architecture</h3><p>Detailed design and engineering balancing beauty and safety.</p></div>
+            <div class="step reveal"><span class="step-num">03</span><h3>Construction</h3><p>Skilled execution using premium materials and modern methods.</p></div>
+            <div class="step reveal"><span class="step-num">04</span><h3>Quality Inspection</h3><p>Multi-stage quality assurance at every milestone.</p></div>
+            <div class="step reveal"><span class="step-num">05</span><h3>Handover</h3><p>A seamless, documented handover of a move-in ready development.</p></div>
           </div>
-        </div>
-      </section>
-
-      <!-- ============ STATS ============ -->
-      <section class="stats">
-        <div class="container grid-4">
-          <div class="stat"><div class="stat-num" data-target="45" data-suffix="+">0</div><div class="stat-label">Projects Planned</div></div>
-          <div class="stat"><div class="stat-num" data-target="15" data-suffix="+">0</div><div class="stat-label">Years of Experience</div></div>
-          <div class="stat"><div class="stat-num" data-target="1200" data-suffix="+">0</div><div class="stat-label">Apartments Developed</div></div>
-          <div class="stat"><div class="stat-num" data-target="980" data-suffix="+">0</div><div class="stat-label">Satisfied Clients</div></div>
         </div>
       </section>
 
       <!-- ============ TESTIMONIALS ============ -->
       <section class="section testimonials">
         <div class="container">
-          <div class="reveal center">
-            <span class="eyebrow">— Testimonials</span>
-            <h2 class="section-title">Trusted by homeowners and investors alike</h2>
-            <p class="lead">Our reputation is built on relationships — here is what clients and partners say about working with Bridgeway Developers.</p>
-          </div>
-          <div class="grid-3">
-            <figure class="quote reveal"><span class="quote-mark">”</span><blockquote>Bridgeway Developers delivered our apartment exactly as promised — on time, beautifully finished and structurally flawless. Their transparency throughout the process gave us real confidence.</blockquote><figcaption><span class="avatar">I</span><span><strong>Imran Sheikh</strong><em>Homeowner, Bridgeway Heights</em></span></figcaption></figure>
-            <figure class="quote reveal"><span class="quote-mark">”</span><blockquote>As an investor, I value reliability above everything. Bridgeway's disciplined delivery and clear reporting made them an easy partner to trust with significant capital.</blockquote><figcaption><span class="avatar">A</span><span><strong>Ayesha Malik</strong><em>Property Investor</em></span></figcaption></figure>
-            <figure class="quote reveal"><span class="quote-mark">”</span><blockquote>The quality of construction and attention to detail at Bridgeway Residences is genuinely premium. It is rare to find a Lahore developer this committed to standards.</blockquote><figcaption><span class="avatar">U</span><span><strong>Usman Tariq</strong><em>Business Owner &amp; Buyer</em></span></figcaption></figure>
+          <div class="label reveal">Testimonials <span class="label-line"></span></div>
+          <h2 class="section-title reveal">Trusted by Homeowners &amp; Investors</h2>
+          <div class="quote-grid">
+            <figure class="quote reveal"><blockquote>Bridgeway delivered our apartment exactly as promised — on time, beautifully finished and structurally flawless. Their transparency gave us real confidence.</blockquote><figcaption><strong>Imran Sheikh</strong><span>Homeowner, Bridgeway Heights</span></figcaption></figure>
+            <figure class="quote reveal"><blockquote>As an investor, I value reliability above all. Bridgeway's disciplined delivery and clear reporting made them an easy partner to trust with significant capital.</blockquote><figcaption><strong>Ayesha Malik</strong><span>Property Investor</span></figcaption></figure>
+            <figure class="quote reveal"><blockquote>The quality of construction at Bridgeway Residences is genuinely premium. It is rare to find a Lahore developer this committed to standards.</blockquote><figcaption><strong>Usman Tariq</strong><span>Business Owner &amp; Buyer</span></figcaption></figure>
           </div>
         </div>
       </section>
 
       <!-- ============ CONTACT ============ -->
       <section class="section contact" id="contact">
-        <div class="container">
-          <div class="contact-card">
-            <div class="contact-info">
-              <span class="eyebrow gold">— Get In Touch</span>
-              <h2>Start Your Project With Us</h2>
-              <p>Have a development, apartment or construction project in mind? Our Lahore team is ready to help you plan, build and invest with confidence.</p>
-              <ul class="contact-list">
-                <li><span class="ci-icon">📞</span><span><small>Call Us</small><a href="tel:+923001234567">+92 300 123 4567</a></span></li>
-                <li><span class="ci-icon">✉️</span><span><small>Email Us</small><a href="mailto:info@bridgewaydevelopers.pk">info@bridgewaydevelopers.pk</a></span></li>
-                <li><span class="ci-icon">📍</span><span><small>Visit Us</small><a href="#map">Main Boulevard, Gulberg III, Lahore, Pakistan</a></span></li>
-              </ul>
-              <div class="socials">
-                <a href="#" aria-label="Facebook">f</a>
-                <a href="#" aria-label="Instagram">◎</a>
-                <a href="#" aria-label="LinkedIn">in</a>
-              </div>
-            </div>
-
-            <div class="contact-form-wrap">
-              <form id="contactForm" novalidate>
-                <h3>Send us a message</h3>
-                <p class="form-sub">Fill in the form and we'll be in touch shortly.</p>
-                <div class="form-row">
-                  <div class="field"><label for="name">Full Name</label><input type="text" id="name" name="name" placeholder="Your name" /><small class="err"></small></div>
-                  <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="+92 3xx xxxxxxx" /><small class="err"></small></div>
-                </div>
-                <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="you@example.com" /><small class="err"></small></div>
-                <div class="field"><label for="message">Your Message</label><textarea id="message" name="message" rows="4" placeholder="Tell us about your project..."></textarea><small class="err"></small></div>
-                <button type="submit" class="btn btn-gold full">Start Your Project With Us →</button>
-              </form>
-              <div class="form-success" id="formSuccess" hidden>
-                <span class="success-icon">✓</span>
-                <h3>Thank you — message received!</h3>
-                <p>Our team will get back to you within one business day to discuss your project.</p>
-                <button type="button" class="btn btn-navy" id="resetForm">Send another message</button>
-              </div>
-            </div>
+        <div class="container contact-grid">
+          <div class="contact-intro">
+            <div class="label">Get In Touch <span class="label-line"></span></div>
+            <h2 class="section-title">Start Your Project<br />With Us</h2>
+            <p>Have a development, apartment or construction project in mind? Our Lahore team is ready to help you plan, build and invest with confidence.</p>
+            <ul class="contact-list">
+              <li><span>Call</span><a href="tel:+923001234567">+92 300 123 4567</a></li>
+              <li><span>Email</span><a href="mailto:info@bridgewaydevelopers.pk">info@bridgewaydevelopers.pk</a></li>
+              <li><span>Visit</span><address>Main Boulevard, Gulberg III, Lahore, Pakistan</address></li>
+            </ul>
           </div>
 
-          <div class="map" id="map">
-            <iframe
-              title="Bridgeway Developers location in Lahore"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=74.30%2C31.49%2C74.38%2C31.55&layer=mapnik&marker=31.52%2C74.34"
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="contact-form-wrap">
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="field"><label for="name">Full Name</label><input type="text" id="name" name="name" placeholder="Your name" /><small class="err"></small></div>
+                <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="+92 3xx xxxxxxx" /><small class="err"></small></div>
+              </div>
+              <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="you@example.com" /><small class="err"></small></div>
+              <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="4" placeholder="Tell us about your project..."></textarea><small class="err"></small></div>
+              <button type="submit" class="btn-navy full">Send Enquiry</button>
+            </form>
+            <div class="form-success" id="formSuccess" hidden>
+              <span class="success-icon">✓</span>
+              <h3>Thank you — enquiry received</h3>
+              <p>Our team will get back to you within one business day.</p>
+              <button type="button" class="btn-outline-dark" id="resetForm">Send another message</button>
+            </div>
           </div>
+        </div>
+
+        <div class="map" id="map">
+          <iframe title="Bridgeway Developers location in Lahore"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=74.30%2C31.49%2C74.38%2C31.55&layer=mapnik&marker=31.52%2C74.34"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </section>
     </main>
@@ -309,46 +274,20 @@
     <footer class="footer">
       <div class="container footer-grid">
         <div class="footer-brand">
-          <a href="#home" class="logo">
-            <span class="logo-mark" aria-hidden="true">
-              <svg viewBox="0 0 64 64" width="24" height="24">
-                <path d="M16 44V20l16-8 16 8v24" fill="none" stroke="#d4a23f" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-                <path d="M24 44V30h16v14" fill="none" stroke="#d4a23f" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-                <path d="M32 44V30" stroke="#d4a23f" stroke-width="3.5" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <span class="logo-text"><strong>Bridgeway</strong><em>Developers</em></span>
-          </a>
-          <p>A Lahore-based real estate development and construction company building premium apartments, residential communities and commercial landmarks — with quality and trust at the core.</p>
-          <div class="socials">
-            <a href="#" aria-label="Facebook">f</a>
-            <a href="#" aria-label="Instagram">◎</a>
-            <a href="#" aria-label="LinkedIn">in</a>
-          </div>
+          <span class="logo-text footer-logo">BRIDGEWAY</span>
+          <p>A Lahore-based real estate development and construction company building premium apartments, residential communities and commercial landmarks.</p>
         </div>
-        <div class="footer-col">
-          <h4>Quick Links</h4>
-          <a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#why-us">Why Us</a><a href="#process">Process</a><a href="#contact">Contact</a>
-        </div>
-        <div class="footer-col">
-          <h4>Services</h4>
-          <a href="#services">Real Estate Development</a><a href="#services">Apartment Construction</a><a href="#services">Residential Projects</a><a href="#services">Commercial Buildings</a><a href="#services">Project Planning</a>
-        </div>
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <p>📍 Main Boulevard, Gulberg III, Lahore, Pakistan</p>
-          <p>📞 <a href="tel:+923001234567">+92 300 123 4567</a></p>
-          <p>✉️ <a href="mailto:info@bridgewaydevelopers.pk">info@bridgewaydevelopers.pk</a></p>
-        </div>
+        <div class="footer-col"><h4>Company</h4><a href="#about">About Us</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#why-us">Why Us</a></div>
+        <div class="footer-col"><h4>Services</h4><a href="#services">Development</a><a href="#services">Apartments</a><a href="#services">Residential</a><a href="#services">Commercial</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="tel:+923001234567">+92 300 123 4567</a><a href="mailto:info@bridgewaydevelopers.pk">info@bridgewaydevelopers.pk</a><span>Gulberg III, Lahore, Pakistan</span></div>
       </div>
       <div class="footer-bottom container">
         <p>© <span id="year"></span> Bridgeway Developers. All rights reserved.</p>
-        <p><a href="#">Privacy Policy</a> <a href="#">Terms of Service</a></p>
+        <p class="footer-socials"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">LinkedIn</a></p>
       </div>
     </footer>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-
     <script src="script.js"></script>
   </body>
 </html>
