@@ -275,30 +275,22 @@ a { text-decoration: none; color: inherit; }
 .loader {
   position: fixed; inset: 0; z-index: 2000;
   display: flex; align-items: center; justify-content: center;
-  background: radial-gradient(circle at 50% 42%, #16273d 0%, #0a1422 55%, #060d17 100%);
+  background: radial-gradient(circle at 50% 48%, #14233b 0%, #0a1526 45%, #060d18 100%);
   animation: loaderHide 0.7s ease 2.9s forwards;
 }
-.loader-inner { display: flex; flex-direction: column; align-items: center; }
-.loader-mono { width: clamp(150px, 32vw, 210px); height: auto; filter: drop-shadow(0 6px 24px rgba(212, 175, 55, 0.25)); }
-.loader-mono .dpath { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bwDraw 1.7s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
-.loader-mono .dpath:nth-child(1) { animation-delay: 0.1s; }
-.loader-mono .dpath:nth-child(2) { animation-delay: 0.3s; }
-.loader-mono .dpath:nth-child(3) { animation-delay: 0.5s; }
-.loader-mono .dpath:nth-child(4) { animation-delay: 0.2s; }
-.loader-mono .dpath:nth-child(5) { animation-delay: 0.7s; }
-.loader-name {
-  margin-top: 1.5rem; font-family: var(--display); font-weight: 400;
-  text-transform: uppercase; letter-spacing: 0.5em; font-size: clamp(0.7rem, 2vw, 0.95rem);
-  color: #e6c558; padding-left: 0.5em; /* offset letter-spacing */
-  opacity: 0; animation: loaderFade 0.9s ease 1.5s forwards;
+.loader-logo {
+  width: clamp(230px, 42vw, 380px); height: auto;
+  opacity: 0; transform: scale(0.92);
+  animation: loaderLogoIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  /* fade the square edges into the backdrop for a seamless look */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 80%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 80%);
 }
 
-@keyframes bwDraw { to { stroke-dashoffset: 0; } }
-@keyframes loaderFade { to { opacity: 1; } }
+@keyframes loaderLogoIn { to { opacity: 1; transform: scale(1); } }
 @keyframes loaderHide { to { opacity: 0; visibility: hidden; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .loader-mono .dpath { animation: none; stroke-dashoffset: 0; }
-  .loader-name { animation: none; opacity: 1; }
+  .loader-logo { animation: none; opacity: 1; transform: none; }
   .loader { animation: loaderHide 0.5s ease 2.2s forwards; }
 }
