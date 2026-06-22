@@ -6,18 +6,18 @@
 :root {
   /* Emaar-inspired palette: warm charcoal darks + muted desert-bronze accent.
      Variable names kept (navy/gold) for stability; values are the new scheme. */
-  --navy-950: #0d0c0a; /* deepest charcoal / near-black */
-  --navy-900: #16140f; /* charcoal — dark sections, logo mark, dark cards */
+  --navy-950: #1a1712; /* deep warm charcoal — softer, more refined than black */
+  --navy-900: #221f18; /* charcoal — dark sections, logo mark, dark cards */
   --navy-800: #211e18; /* primary dark text */
-  --navy-700: #2d2820; /* */
-  --navy-600: #3c352b; /* */
-  --navy-500: #6f6657; /* warm taupe-grey — muted body text */
-  --navy-100: #d9d2c5; /* warm light grey — text on dark */
-  --navy-50: #f6f3ee;  /* warm ivory — light section backgrounds */
-  --gold-300: #cdb389; /* light desert gold — accents on dark */
-  --gold-400: #b08d57; /* primary bronze-gold */
-  --gold-500: #97744a; /* darker bronze */
-  --gold-600: #8a6d42; /* deep bronze — accents/eyebrows on light */
+  --navy-700: #312b22; /* */
+  --navy-600: #433b30; /* */
+  --navy-500: #756c5d; /* warm taupe-grey — muted body text */
+  --navy-100: #ddd6ca; /* warm light grey — text on dark */
+  --navy-50: #f8f5f0;  /* warm ivory — light section backgrounds */
+  --gold-300: #d2ba93; /* light desert gold — accents on dark */
+  --gold-400: #b08d57; /* primary bronze-gold (Emaar desert bronze) */
+  --gold-500: #9a7846; /* darker bronze */
+  --gold-600: #876a3f; /* deep bronze — accents/eyebrows on light */
   --white: #ffffff;
   --shadow-card: 0 8px 30px -8px rgba(33, 30, 24, 0.16);
   --shadow-premium: 0 20px 60px -15px rgba(22, 20, 15, 0.28);
@@ -79,7 +79,7 @@ h1, h2, h3, h4, .logo-text strong {
 .eyebrow.gold { color: var(--gold-300); }
 /* Eyebrows on dark-background sections need the lighter desert gold */
 .projects .eyebrow, .process .eyebrow { color: var(--gold-300); }
-.section-title { font-size: clamp(1.85rem, 3.5vw, 2.75rem); font-weight: 800; color: var(--navy-900); }
+.section-title { font-size: clamp(1.85rem, 3.5vw, 2.75rem); font-weight: 700; letter-spacing: -0.015em; color: var(--navy-900); }
 .section-title.light { color: #fff; }
 .lead { margin-top: 1.25rem; font-size: 1.05rem; color: var(--navy-500); max-width: 640px; }
 .center .lead { margin-left: auto; margin-right: auto; }
@@ -132,7 +132,7 @@ h1, h2, h3, h4, .logo-text strong {
   background: rgba(176,141,87,0.12); color: var(--gold-300); border-radius: 999px;
   font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em;
 }
-.hero h1 { margin-top: 1.5rem; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; color: #fff; }
+.hero h1 { margin-top: 1.5rem; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: -0.02em; color: #fff; }
 .hero-sub { margin-top: 1.5rem; max-width: 560px; font-size: 1.125rem; color: var(--navy-100); }
 .hero-actions { margin-top: 2.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .hero-highlights { list-style: none; margin-top: 3rem; display: flex; flex-wrap: wrap; gap: 0.75rem 2rem; }
