@@ -1,65 +1,59 @@
 # Bridgeway Developers — Website
 
 A modern, premium, fully responsive marketing website for **Bridgeway Developers**, a
-Lahore-based real estate development and construction company. Built with **React**,
-**Vite**, and **Tailwind CSS**.
+Lahore-based real estate development and construction company.
+
+**Built as a plain static site — pure HTML, CSS and JavaScript. No build step, no
+dependencies. Deploys instantly anywhere.**
+
+## 📁 Files
+
+```
+index.html    — all page content & sections
+styles.css    — the full premium theme (navy / charcoal / gold)
+script.js     — mobile menu, scroll reveal, stat counters, project filters, contact form
+favicon.svg   — site icon
+```
+
+## 🚀 View it
+
+Just open `index.html` in any browser — that's it. Nothing to install or build.
+
+(To preview with a local server instead: `python3 -m http.server` then open
+<http://localhost:8000>.)
+
+## ☁️ Deploy (instant — no build needed)
+
+Because this is a static site, any host serves it as-is. **Leave the build command empty.**
+
+**Cloudflare Pages**
+- Connect the GitHub repo → on the build screen:
+  - Framework preset: **None**
+  - Build command: **(leave blank)**
+  - Build output directory: **`/`** (the repo root)
+- Save and Deploy → live in seconds.
+
+**Or drag-and-drop:** Netlify Drop (<https://app.netlify.com/drop>) or Cloudflare Pages
+"Upload assets" — just drop the folder containing these files.
+
+**Or GitHub Pages:** repo Settings → Pages → deploy from branch → root.
 
 ## ✨ Features
 
-- **Premium corporate design** — deep navy & charcoal palette with gold/bronze accents
-- **Sticky navigation** with a transparent-to-solid scroll transition and animated mobile menu
-- **Hero** with layered background image, gradient fallback, and staggered entrance animations
-- **About** section with floating experience badge and trust pillars
-- **Services** — 6 service cards (development, apartments, residential, commercial, planning, management)
-- **Featured Projects** with category filters (All / Residential / Commercial / Apartments)
-- **Why Choose Us**, **Process** (5 steps), and an animated **Stats** counter section
-- **Testimonials** from clients and investors
-- **Contact** section with a validated form (client-side success state), contact details, and an embedded map
-- **Footer** with quick links, services, contact info, and social placeholders
-- Smooth scrolling, scroll-reveal animations, hover effects, back-to-top button
-- Fully responsive (desktop / tablet / mobile) and accessibility-minded
+- Sticky navbar with scroll transition + animated mobile menu
+- Hero with gradient background and entrance reveal
+- About, Services (6 cards), filterable Featured Projects, Why Choose Us, 5-step Process
+- Animated stat counters, testimonials
+- Contact form with validation + success message (front-end only)
+- Embedded map, footer, back-to-top button, smooth scrolling, scroll-reveal animations
+- Fully responsive (desktop / tablet / mobile)
 
-## 🚀 Getting Started
+## 🎨 Customise
 
-```bash
-# Install dependencies
-npm install
+- **Text / projects / contact details:** edit `index.html` directly.
+- **Colours / theme:** the CSS variables at the top of `styles.css` (`:root { … }`).
+- **Images:** swap the Unsplash URLs in `index.html` for your own photos.
 
-# Start the dev server (http://localhost:5173)
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview the production build
-npm run preview
-```
-
-## 🎨 Customisation
-
-Most content lives in **`src/data/siteData.js`** — company details, navigation, services,
-projects, testimonials, stats, and process steps. Edit there to update copy without touching
-components.
-
-- **Colours / theme:** `tailwind.config.js`
-- **Global styles & component classes:** `src/index.css`
-- **Project & section images:** Unsplash URLs in `src/data/siteData.js` and individual
-  components (each has a gradient fallback if images don't load).
-
-## 📁 Project Structure
-
-```
-src/
-├── components/      # Navbar, Hero, About, Services, Projects, etc.
-├── data/            # siteData.js — all editable content
-├── hooks/           # useReveal.js — scroll-reveal animations
-├── App.jsx
-├── main.jsx
-└── index.css
-```
-
-## 📝 Notes
-
-- The contact form has **no backend** — it validates input and shows a success message. Wire
-  `handleSubmit` in `src/components/Contact.jsx` to your email service or API when ready.
-- All phone, email, and address values are placeholders in `src/data/siteData.js`.
+> The contact form has **no backend** — it validates and shows a success message. Connect
+> the `submit` handler in `script.js` to your email service or form endpoint when ready.
+> Phone, email, and address are placeholders.
