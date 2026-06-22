@@ -277,7 +277,6 @@ a { text-decoration: none; color: inherit; }
   background: radial-gradient(circle at 50% 42%, #16273d 0%, #0a1422 55%, #060d17 100%);
   animation: loaderHide 0.7s ease 2.9s forwards;
 }
-.preloaded .loader { display: none !important; }
 .loader-inner { display: flex; flex-direction: column; align-items: center; }
 .loader-mono { width: clamp(150px, 32vw, 210px); height: auto; filter: drop-shadow(0 6px 24px rgba(212, 175, 55, 0.25)); }
 .loader-mono .dpath { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bwDraw 1.7s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
