@@ -292,20 +292,13 @@ a { text-decoration: none; color: inherit; }
   color: #e6c558; padding-left: 0.5em; /* offset letter-spacing */
   opacity: 0; animation: loaderFade 0.9s ease 1.5s forwards;
 }
-.loader-bar {
-  margin-top: 1.75rem; width: clamp(140px, 30vw, 200px); height: 2px;
-  background: rgba(230, 197, 88, 0.18); overflow: hidden; border-radius: 2px;
-}
-.loader-bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #c79a3a, #f7e98e); animation: loaderBar 2.7s ease forwards; }
 
 @keyframes bwDraw { to { stroke-dashoffset: 0; } }
 @keyframes loaderFade { to { opacity: 1; } }
-@keyframes loaderBar { to { width: 100%; } }
 @keyframes loaderHide { to { opacity: 0; visibility: hidden; } }
 
 @media (prefers-reduced-motion: reduce) {
   .loader-mono .dpath { animation: none; stroke-dashoffset: 0; }
   .loader-name { animation: none; opacity: 1; }
-  .loader-bar span { animation: none; width: 100%; }
   .loader { animation: loaderHide 0.5s ease 2.2s forwards; }
 }
