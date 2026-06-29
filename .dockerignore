@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+*.md
+.DS_Store
+
+# runtime state (recreated on the volume) — keep data/seed.json
+data/draft.json
+data/published.json
+data/auth.json
+
+# uploaded media (lives on the volume)
+uploads/*
+!uploads/.gitkeep

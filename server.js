@@ -23,14 +23,17 @@ const PORT = process.env.PORT || 3000;
 
 /* ---------- Paths ---------- */
 const ROOT = __dirname;
-const DATA_DIR = path.join(ROOT, 'data');
-const UPLOAD_DIR = path.join(ROOT, 'uploads');
-const SEED_FILE = path.join(DATA_DIR, 'seed.json');
-const PUBLISHED_FILE = path.join(DATA_DIR, 'published.json');
-const DRAFT_FILE = path.join(DATA_DIR, 'draft.json');
-const AUTH_FILE = path.join(DATA_DIR, 'auth.json');
+// Seed is baked into the image (read-only starting content).
+const SEED_FILE = path.join(ROOT, 'data', 'seed.json');
+// Runtime state + uploads live on a PERSISTENT volume in production.
+// Override with STATE_DIR / UPLOAD_DIR env vars (e.g. /data on Fly.io).
+const STATE_DIR = process.env.STATE_DIR || path.join(ROOT, 'data');
+const UPLOAD_DIR = process.env.UPLOAD_DIR || path.join(ROOT, 'uploads');
+const PUBLISHED_FILE = path.join(STATE_DIR, 'published.json');
+const DRAFT_FILE = path.join(STATE_DIR, 'draft.json');
+const AUTH_FILE = path.join(STATE_DIR, 'auth.json');
 
-for (const dir of [DATA_DIR, UPLOAD_DIR]) {
+for (const dir of [STATE_DIR, UPLOAD_DIR]) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
 

@@ -1,0 +1,27 @@
+# Fly.io configuration for Bridgeway Developers
+# Change `app` to a unique name, then: fly launch --no-deploy (or fly deploy)
+app = "bridgeway-developers"
+primary_region = "cdg"   # pick the region closest to you (e.g. "fra", "lhr", "bom", "iad")
+
+[build]
+
+[env]
+  PORT = "8080"
+  STATE_DIR = "/data"
+  UPLOAD_DIR = "/data/uploads"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0   # set to 1 to avoid cold starts (uses more free allowance)
+
+# Persistent volume — keeps your published content + uploaded photos/videos
+[[mounts]]
+  source = "bridgeway_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
