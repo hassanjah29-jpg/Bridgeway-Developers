@@ -139,6 +139,12 @@ const upload = multer({
   }
 });
 
+/* ---------- Never cache admin or API responses ---------- */
+app.use(['/api', '/admin'], (req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+  next();
+});
+
 /* ---------- Static assets ---------- */
 app.use('/uploads', express.static(UPLOAD_DIR));
 app.use('/admin/assets', express.static(path.join(ROOT, 'public', 'admin')));
@@ -311,4 +317,6 @@ app.listen(PORT, () => {
   console.log('  Bridgeway Developers running:');
   console.log('   • Website : http://localhost:%d/', PORT);
   console.log('   • Admin   : http://localhost:%d/admin', PORT);
+  console.log('   • STATE_DIR=%s  (draft exists: %s, published exists: %s)',
+    STATE_DIR, fs.existsSync(DRAFT_FILE), fs.existsSync(PUBLISHED_FILE));
 });

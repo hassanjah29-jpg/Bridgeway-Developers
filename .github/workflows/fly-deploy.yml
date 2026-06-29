@@ -34,3 +34,11 @@ jobs:
 
       - name: Deploy
         run: flyctl deploy --remote-only --ha=false
+
+      # Print live state so we can confirm the volume is attached to the machine.
+      - name: Diagnostics (volumes + machines)
+        if: always()
+        run: |
+          echo "===== VOLUMES ====="; flyctl volumes list || true
+          echo "===== MACHINES ====="; flyctl machine list || true
+          echo "===== STATUS ====="; flyctl status || true
