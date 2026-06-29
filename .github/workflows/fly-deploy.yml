@@ -28,6 +28,17 @@ jobs:
             flyctl volumes create bridgeway_data --region sin --count 1 --yes
           fi
 
+      # Give the volume room for videos (grow to 3GB; free allowance covers it).
+      - name: Ensure volume is at least 3GB
+        run: |
+          info=$(flyctl volumes list --json)
+          vid=$(echo "$info" | jq -r '[.[] | select(.name=="bridgeway_data")][0].id')
+          sz=$(echo "$info" | jq -r '[.[] | select(.name=="bridgeway_data")][0].size_gb // 0')
+          echo "volume=$vid size=${sz}GB"
+          if [ "$vid" != "null" ] && [ -n "$vid" ] && [ "${sz%.*}" -lt 3 ]; then
+            flyctl volumes extend "$vid" --size 3 || flyctl volume extend "$vid" -s 3 || true
+          fi
+
       # Keep the app at a single machine so it needs only one volume.
       - name: Scale to one machine
         run: flyctl scale count 1 --yes

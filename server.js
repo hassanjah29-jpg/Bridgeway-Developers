@@ -281,6 +281,9 @@ app.post('/api/admin/upload', requireAuth, (req, res) => {
       const msg = err.code === 'LIMIT_FILE_SIZE'
         ? 'That file is too large (max ' + MAX_UPLOAD_MB + ' MB). Please compress the video and try again.'
         : err.message;
+      // Drain any remaining body so the browser receives this JSON error
+      // instead of a dropped connection ("network error").
+      try { req.unpipe(); req.resume(); } catch (e) {}
       return res.status(400).json({ error: msg });
     }
     if (!req.file) return res.status(400).json({ error: 'No file received' });
@@ -333,10 +336,15 @@ app.post('/api/admin/password', requireAuth, (req, res) => {
 
 /* ---------- Start ---------- */
 loadAuth(); // ensure credentials exist on boot
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log('  Bridgeway Developers running:');
   console.log('   • Website : http://localhost:%d/', PORT);
   console.log('   • Admin   : http://localhost:%d/admin', PORT);
   console.log('   • STATE_DIR=%s  (draft exists: %s, published exists: %s)',
     STATE_DIR, fs.existsSync(DRAFT_FILE), fs.existsSync(PUBLISHED_FILE));
 });
+// Allow long-running uploads (large videos on slow connections) without the
+// server killing the request mid-transfer.
+server.requestTimeout = 0;        // no overall request timeout
+server.headersTimeout = 120000;   // 2 min to receive headers
+server.keepAliveTimeout = 75000;
