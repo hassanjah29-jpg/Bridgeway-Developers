@@ -1,7 +1,6 @@
 # Fly.io configuration for Bridgeway Developers
-# Change `app` to a unique name, then: fly launch --no-deploy (or fly deploy)
-app = "bridgeway-developers"
-primary_region = "cdg"   # pick the region closest to you (e.g. "fra", "lhr", "bom", "iad")
+app = "bridgeway-developers-n9ggda"
+primary_region = "sin"
 
 [build]
 
