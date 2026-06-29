@@ -275,18 +275,31 @@ app.post('/api/admin/discard', requireAuth, (req, res) => {
 });
 
 /* ---------- Media ---------- */
+const uploadLog = [];
+function logUpload(entry) {
+  const e = Object.assign({ at: new Date().toISOString() }, entry);
+  uploadLog.push(e);
+  while (uploadLog.length > 40) uploadLog.shift();
+  console.log('[upload]', JSON.stringify(e));
+}
+
 app.post('/api/admin/upload', requireAuth, (req, res) => {
+  const started = Date.now();
+  logUpload({ event: 'start', contentType: req.headers['content-type'] || '', contentLength: req.headers['content-length'] || '' });
+  req.on('aborted', () => logUpload({ event: 'client-aborted' }));
   upload.single('file')(req, res, (err) => {
     if (err) {
       const msg = err.code === 'LIMIT_FILE_SIZE'
         ? 'That file is too large (max ' + MAX_UPLOAD_MB + ' MB). Please compress the video and try again.'
         : err.message;
+      logUpload({ event: 'error', code: err.code || null, message: err.message });
       // Drain any remaining body so the browser receives this JSON error
       // instead of a dropped connection ("network error").
       try { req.unpipe(); req.resume(); } catch (e) {}
       return res.status(400).json({ error: msg });
     }
-    if (!req.file) return res.status(400).json({ error: 'No file received' });
+    if (!req.file) { logUpload({ event: 'no-file' }); return res.status(400).json({ error: 'No file received' }); }
+    logUpload({ event: 'success', name: req.file.originalname, type: req.file.mimetype, size: req.file.size, ms: Date.now() - started });
     res.json({
       ok: true,
       url: '/uploads/' + req.file.filename,
@@ -295,6 +308,13 @@ app.post('/api/admin/upload', requireAuth, (req, res) => {
       size: req.file.size
     });
   });
+});
+
+// Diagnostics: open this URL while logged in to see recent upload attempts.
+app.get('/api/admin/uploadlog', requireAuth, (req, res) => {
+  let free = null;
+  try { const st = fs.statfsSync ? fs.statfsSync(UPLOAD_DIR) : null; if (st) free = Math.round((st.bavail * st.bsize) / 1048576) + ' MB free'; } catch (e) {}
+  res.json({ uploadDir: UPLOAD_DIR, diskFree: free, maxUploadMB: MAX_UPLOAD_MB, recent: uploadLog.slice(-25) });
 });
 
 app.get('/api/admin/media', requireAuth, (req, res) => {
@@ -332,6 +352,13 @@ app.post('/api/admin/password', requireAuth, (req, res) => {
   auth.isDefault = false;
   saveAuth(auth);
   res.json({ ok: true });
+});
+
+/* ---------- Catch-all error handler (return JSON, never reset) ---------- */
+app.use((err, req, res, next) => {
+  console.error('[error]', req.method, req.path, '-', (err && err.message) || err);
+  if (res.headersSent) return next(err);
+  res.status(500).json({ error: (err && err.message) || 'Server error' });
 });
 
 /* ---------- Start ---------- */
