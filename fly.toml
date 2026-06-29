@@ -12,9 +12,10 @@ primary_region = "sin"
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = "stop"
+  # Stateful app: keep it always running so the idle stop/start never risks data.
+  auto_stop_machines = false
   auto_start_machines = true
-  min_machines_running = 0   # set to 1 to avoid cold starts (uses more free allowance)
+  min_machines_running = 1
 
 # Persistent volume — keeps your published content + uploaded photos/videos
 [[mounts]]
