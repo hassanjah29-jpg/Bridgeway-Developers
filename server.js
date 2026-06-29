@@ -162,6 +162,7 @@ app.use(['/api', '/admin'], (req, res, next) => {
 
 /* ---------- Static assets ---------- */
 app.use('/uploads', express.static(UPLOAD_DIR));
+app.use('/media', express.static(path.join(ROOT, 'media')));
 app.use('/admin/assets', express.static(path.join(ROOT, 'public', 'admin')));
 // Existing site assets at repo root (css, js, logo, favicon, default hero video).
 for (const f of ['styles.css', 'script.js', 'logo.png', 'favicon.svg', 'hero-video.mp4']) {
@@ -182,8 +183,13 @@ app.get('/projects/:id', (req, res) => {
   const isPreview = req.query.preview === '1' && req.session.user;
   const content = isPreview ? getDraft().content : getPublished().content;
   const items = (content.projects && content.projects.items) || [];
-  const project = items.find((p) => p.id === req.params.id);
+  let project = items.find((p) => p.id === req.params.id);
   if (!project) return res.redirect('/#projects');
+  // Pearl One Residences ships with a built-in cinematic construction hero video
+  // (used only if no cover video has been set in the admin).
+  if (!project.video && /pearl\s*one/i.test(project.title || '')) {
+    project = Object.assign({}, project, { video: '/media/pearl-one-hero.mp4' });
+  }
   res.render('project', { c: content, project, preview: isPreview });
 });
 
