@@ -32,14 +32,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <!-- Show the intro loader only on a visitor's first visit (per browser). -->
+    <!-- Show the intro loader once per browser session (not on internal navigation). -->
     <script>
       (function () {
         try {
-          if (localStorage.getItem('bwLoaderShown')) {
+          if (sessionStorage.getItem('bwLoaderShown')) {
             document.documentElement.classList.add('loader-seen');
           } else {
-            localStorage.setItem('bwLoaderShown', '1');
+            sessionStorage.setItem('bwLoaderShown', '1');
           }
         } catch (e) {}
       })();
