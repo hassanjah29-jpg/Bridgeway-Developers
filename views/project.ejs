@@ -47,26 +47,56 @@
       </div>
     </header>
 
-    <main class="pp">
-      <!-- ============ PROJECT HERO ============ -->
-      <section class="pp-hero">
+    <main class="pp<%= project.video ? ' pp-cinematic' : '' %>">
+      <!-- ============ PROJECT HERO (cinematic) ============ -->
+      <section class="pp-hero" id="ppHero">
         <div class="pp-hero-media" id="ppHeroMedia">
-          <% if (project.video) { %>
-          <video id="ppHeroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="<%= project.image %>">
-            <source src="<%= project.video %>" type="video/mp4" />
-          </video>
-          <% } else { %>
-          <img src="<%= project.image %>" alt="<%= project.title %>" />
-          <% } %>
+          <div class="pp-hero-media-inner">
+            <% if (project.video) { %>
+            <video id="ppHeroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="<%= project.image %>">
+              <source src="<%= project.video %>" type="video/mp4" />
+            </video>
+            <% } else { %>
+            <img src="<%= project.image %>" alt="<%= project.title %>" />
+            <% } %>
+          </div>
         </div>
         <div class="pp-hero-overlay"></div>
-        <div class="container pp-hero-inner">
+        <div class="container pp-hero-inner" id="ppHeroInner">
           <a href="/#projects" class="pp-back">← All Projects</a>
           <% if (project.status) { %><span class="pp-status"><%= project.status %></span><% } %>
           <span class="pp-type"><%= project.type %></span>
           <h1 class="pp-title"><%= project.title %></h1>
+          <div class="pp-hero-actions">
+            <a href="/#contact" class="btn-navy">Enquire Now</a>
+            <a href="#vision" class="btn-ghost-light">Explore the Project</a>
+          </div>
+        </div>
+        <div class="pp-hero-scroll" aria-hidden="true">
+          <span>Scroll</span>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m6 9 6 6 6-6"/></svg>
         </div>
       </section>
+
+      <!-- ============ FROM VISION TO COMPLETION ============ -->
+      <% if (c.process && c.process.items && c.process.items.length) { %>
+      <section class="section pp-vision" id="vision">
+        <div class="container">
+          <div class="label reveal">Construction Journey <span class="label-line"></span></div>
+          <h2 class="section-title reveal">From Vision to Completion</h2>
+          <p class="pp-vision-lead reveal">Every Bridgeway development moves through a disciplined, transparent build process — from first survey to final handover.</p>
+          <div class="pp-stages">
+            <% c.process.items.forEach(function (s, i) { %>
+            <div class="pp-stage-step reveal build" style="transition-delay: <%= (i % 5) * 0.08 %>s">
+              <span class="pp-stage-num"><%= s.num %></span>
+              <h3><%= s.title %></h3>
+              <p><%= s.description %></p>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+      </section>
+      <% } %>
 
       <!-- ============ OVERVIEW ============ -->
       <section class="section pp-overview">
@@ -173,17 +203,47 @@
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
     <script src="/script.js"></script>
     <script>
-      // Subtle parallax on the project hero + ensure its video plays on mobile.
+      // Cinematic hero: ensure video plays, then drive a slow scroll-linked
+      // parallax (scale up + drift), text fade-out, and an architectural
+      // blur/darken transition into the section below.
       (function () {
-        var media = document.getElementById('ppHeroMedia');
-        if (media && window.innerWidth > 760 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          window.addEventListener('scroll', function () {
-            var y = window.scrollY;
-            if (y < window.innerHeight) media.style.transform = 'translateY(' + (y * 0.12) + 'px)';
-          }, { passive: true });
-        }
         var v = document.getElementById('ppHeroVideo');
-        if (v) { v.muted = true; v.playsInline = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        if (v) {
+          v.muted = true; v.playsInline = true;
+          var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+          tryPlay();
+          v.addEventListener('canplay', tryPlay);
+          document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+        }
+        var hero = document.getElementById('ppHero');
+        var media = document.getElementById('ppHeroMedia');
+        var inner = document.getElementById('ppHeroInner');
+        var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!hero || !media || reduce) return;
+
+        var ticking = false;
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () {
+            var h = hero.offsetHeight || window.innerHeight;
+            var y = window.scrollY;
+            var p = Math.max(0, Math.min(y / h, 1)); // 0 → 1 across the hero
+            // Video slowly scales up and drifts upward for depth.
+            media.style.transform = 'scale(' + (1 + p * 0.14).toFixed(4) + ') translateY(' + (-(p * 26)).toFixed(2) + 'px)';
+            // Gentle blur + darken as the next section arrives.
+            media.style.filter = 'brightness(' + (1 - p * 0.45).toFixed(3) + ') blur(' + (p * 4).toFixed(2) + 'px)';
+            // Overlay text fades up and out.
+            if (inner) {
+              inner.style.opacity = Math.max(0, 1 - p * 1.5).toFixed(3);
+              inner.style.transform = 'translateY(' + (-(p * 40)).toFixed(2) + 'px)';
+            }
+            ticking = false;
+          });
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        onScroll();
       })();
     </script>
   </body>
