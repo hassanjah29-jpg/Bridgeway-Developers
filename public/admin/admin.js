@@ -141,28 +141,52 @@
   });
 
   /* ---------------- media upload + picker ---------------- */
+  // Upload in 1MB chunks so no single request can be cut off by a proxy/timeout.
   function uploadFile(file, onProgress) {
-    return new Promise(function (resolve, reject) {
-      var fd = new FormData();
-      fd.append('file', file);
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/api/admin/upload');
-      xhr.timeout = 15 * 60 * 1000; // 15 min for large videos
-      xhr.upload.onprogress = function (e) {
-        if (e.lengthComputable && typeof onProgress === 'function') {
-          onProgress(Math.round((e.loaded / e.total) * 100));
-        }
-      };
-      xhr.onload = function () {
-        var j; try { j = JSON.parse(xhr.responseText); } catch (e) { j = {}; }
-        if (xhr.status >= 200 && xhr.status < 300) resolve(j);
-        else if (xhr.status === 401) { location.href = '/admin/login'; reject(new Error('Not authenticated')); }
-        else reject(new Error(j.error || ('Upload failed (' + xhr.status + ')')));
-      };
-      xhr.onerror = function () { reject(new Error('Network error during upload')); };
-      xhr.ontimeout = function () { reject(new Error('Upload timed out — file may be too large or the connection too slow.')); };
-      xhr.send(fd);
-    });
+    var CHUNK = 1024 * 1024; // 1 MB
+    var total = Math.max(1, Math.ceil(file.size / CHUNK));
+    var id = (Date.now().toString(36) + Math.random().toString(36).slice(2, 10)).replace(/[^a-z0-9]/gi, '');
+
+    function sendChunk(index) {
+      var start = index * CHUNK;
+      var blob = file.slice(start, Math.min(start + CHUNK, file.size));
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/admin/upload-chunk');
+        xhr.timeout = 90 * 1000; // generous per-chunk timeout
+        xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+        xhr.setRequestHeader('x-upload-id', id);
+        xhr.setRequestHeader('x-chunk-index', String(index));
+        xhr.setRequestHeader('x-total-chunks', String(total));
+        xhr.setRequestHeader('x-file-size', String(file.size));
+        xhr.setRequestHeader('x-file-name', encodeURIComponent(file.name || 'file'));
+        xhr.onload = function () {
+          var j; try { j = JSON.parse(xhr.responseText); } catch (e) { j = {}; }
+          if (xhr.status >= 200 && xhr.status < 300) resolve(j);
+          else if (xhr.status === 401) { location.href = '/admin/login'; reject(new Error('Not authenticated')); }
+          else reject(new Error(j.error || ('Upload failed (' + xhr.status + ')')));
+        };
+        xhr.onerror = function () { reject(new Error('Network error during upload')); };
+        xhr.ontimeout = function () { reject(new Error('Upload timed out')); };
+        xhr.send(blob);
+      });
+    }
+
+    function step(index, lastResult) {
+      if (index >= total) return Promise.resolve(lastResult);
+      // Retry a failed chunk up to twice before giving up.
+      function attempt(tries) {
+        return sendChunk(index).catch(function (e) {
+          if (tries > 0) return attempt(tries - 1);
+          throw e;
+        });
+      }
+      return attempt(2).then(function (res) {
+        if (typeof onProgress === 'function') onProgress(Math.round(((index + 1) / total) * 100));
+        return step(index + 1, res);
+      });
+    }
+    return step(0, null);
   }
   // A reusable image/video picker bound to obj[prop]
   function mediaField(label, obj, prop, opts) {
