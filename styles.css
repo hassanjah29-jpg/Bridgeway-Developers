@@ -359,20 +359,14 @@ a { text-decoration: none; color: inherit; }
 @keyframes ppBob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 7px); } }
 
 /* Scroll-scrub sequence hero (the building constructs as you scroll) */
-.pp-seq { position: relative; height: 320vh; background: var(--navy-dark); }
-.pp-seq-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--navy-dark); }
+.pp-seq { position: relative; height: 240vh; background: var(--navy-dark); }
+.pp-seq-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; align-items: flex-end; background: var(--navy-dark); }
 .pp-seq-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
 .pp-seq-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: opacity .4s ease; }
-/* Light vignette only — keep the construction crisp and clearly visible. */
-.pp-seq-sticky::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(to bottom, rgba(8,15,24,0.28) 0%, rgba(8,15,24,0) 22%, rgba(8,15,24,0) 72%, rgba(8,15,24,0.55) 100%); }
-.pp-seq-back { position: absolute; top: 1.4rem; left: 1.6rem; z-index: 3; width: 44px; height: 44px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.35); background: rgba(0,0,0,0.3); color: #fff; display: grid; place-items: center;
-  font-size: 1.2rem; transition: background .25s; }
-.pp-seq-back:hover { background: rgba(0,0,0,0.6); }
-.pp-seq-scroll { position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%); z-index: 3; color: rgba(255,255,255,0.85);
-  animation: ppBob 2.4s ease-in-out infinite; transition: opacity .3s ease; }
-@media (max-width: 560px) { .pp-seq { height: 260vh; } .pp-seq-back { top: 0.9rem; left: 1rem; } }
+.pp-seq .pp-hero-overlay { z-index: 1; }
+.pp-seq .pp-hero-inner { z-index: 2; }
+.pp-seq .pp-hero-scroll { z-index: 2; }
+@media (max-width: 560px) { .pp-seq { height: 200vh; } }
 
 /* From Vision to Completion — construction stages */
 .pp-vision { background: var(--bg-soft); }
