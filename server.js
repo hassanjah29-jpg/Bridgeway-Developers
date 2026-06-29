@@ -185,10 +185,12 @@ app.get('/projects/:id', (req, res) => {
   const items = (content.projects && content.projects.items) || [];
   let project = items.find((p) => p.id === req.params.id);
   if (!project) return res.redirect('/#projects');
-  // Pearl One Residences ships with a built-in cinematic construction hero video
-  // (used only if no cover video has been set in the admin).
-  if (!project.video && /pearl\s*one/i.test(project.title || '')) {
-    project = Object.assign({}, project, { video: '/media/pearl-one-hero.mp4' });
+  // Pearl One Residences ships with a built-in scroll-scrub construction
+  // sequence hero (the building animates as you scroll).
+  if (/pearl\s*one/i.test(project.title || '')) {
+    project = Object.assign({}, project, {
+      sequence: { base: '/media/pearl-seq/frame-', pad: 3, ext: '.jpg', count: 120, poster: '/media/pearl-seq/frame-001.jpg' }
+    });
   }
   res.render('project', { c: content, project, preview: isPreview });
 });
