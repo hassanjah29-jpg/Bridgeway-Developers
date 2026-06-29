@@ -1,0 +1,156 @@
+{
+  "site": {
+    "brandName": "Bridgeway Developers",
+    "title": "Bridgeway Developers | Building Lahore's Future",
+    "metaDescription": "Bridgeway Developers — a Lahore-based real estate development and construction company building premium apartments, residential and commercial projects.",
+    "metaKeywords": "Bridgeway Developers, Lahore real estate, property development Lahore, apartments Lahore, construction company Pakistan, commercial buildings, residential projects",
+    "themeColor": "#16273d"
+  },
+  "hero": {
+    "eyebrow": "Bridgeway Developers",
+    "title": "Building Lahore's Future",
+    "tagline": "One Development at a Time",
+    "video": "hero-video.mp4",
+    "poster": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80"
+  },
+  "about": {
+    "leadParagraphs": [
+      "As a leading developer in Lahore, Bridgeway Developers defines the skyline and the standard for premium living. We deliver an exceptional portfolio of apartments, homes and commercial landmarks across the city's most sought-after districts — from DHA and Bahria Town to Gulberg and Johar Town.",
+      "Beyond delivering an unparalleled lifestyle, Bridgeway offers a secure path for investment in Lahore real estate. Our developments combine architectural excellence with quality construction and reliable delivery, ensuring strong long-term value with the region's most trusted name."
+    ],
+    "stats": [
+      { "target": 45, "suffix": "+", "label": "Projects Planned" },
+      { "target": 15, "suffix": "+", "label": "Years of Experience" },
+      { "target": 1200, "suffix": "+", "label": "Apartments Developed" },
+      { "target": 980, "suffix": "+", "label": "Satisfied Clients" }
+    ]
+  },
+  "projects": {
+    "label": "Communities",
+    "heading": "Featured Projects",
+    "items": [
+      {
+        "id": "p1",
+        "title": "Bridgeway Heights",
+        "type": "Apartments · DHA Phase 6",
+        "status": "Under Construction",
+        "description": "A 14-storey luxury apartment tower with smart-home living and panoramic city views.",
+        "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=80",
+        "video": "",
+        "gallery": []
+      },
+      {
+        "id": "p2",
+        "title": "Bridgeway Residences",
+        "type": "Residential · Bahria Town",
+        "status": "Now Selling",
+        "description": "An exclusive gated community of contemporary family homes around landscaped courtyards.",
+        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80",
+        "video": "",
+        "gallery": []
+      },
+      {
+        "id": "p3",
+        "title": "Bridgeway Commercial Plaza",
+        "type": "Commercial · Gulberg III",
+        "status": "Planning",
+        "description": "A flagship mixed-use plaza with premium retail, corporate offices and structured parking.",
+        "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80",
+        "video": "",
+        "gallery": []
+      },
+      {
+        "id": "p4",
+        "title": "Bridgeway Skyline",
+        "type": "Apartments · Johar Town",
+        "status": "Now Selling",
+        "description": "Mid-rise smart apartments designed for young professionals and growing families.",
+        "image": "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=900&q=80",
+        "video": "",
+        "gallery": []
+      },
+      {
+        "id": "p5",
+        "title": "Bridgeway Garden Homes",
+        "type": "Residential · Lake City",
+        "status": "Under Construction",
+        "description": "Elegant villas with private gardens in a serene, master-planned neighbourhood.",
+        "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80",
+        "video": "",
+        "gallery": []
+      },
+      {
+        "id": "p6",
+        "title": "Bridgeway Business Hub",
+        "type": "Commercial · Model Town",
+        "status": "Planning",
+        "description": "A modern corporate address offering grade-A office floors and conference facilities.",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80",
+        "video": "",
+        "gallery": []
+      }
+    ]
+  },
+  "services": {
+    "label": "What We Do",
+    "heading": "Our Expertise",
+    "items": [
+      { "no": "01", "title": "Real Estate Development", "description": "End-to-end development of land into high-value residential and commercial communities." },
+      { "no": "02", "title": "Apartment Construction", "description": "Modern, structurally sound apartment complexes engineered for comfort and durability." },
+      { "no": "03", "title": "Residential Projects", "description": "Thoughtfully planned homes and gated communities balancing design with liveability." },
+      { "no": "04", "title": "Commercial Buildings", "description": "Premium retail, office and mixed-use developments in prime Lahore locations." },
+      { "no": "05", "title": "Planning & Execution", "description": "Detailed feasibility, scheduling and budgeting that keep every project on standard." },
+      { "no": "06", "title": "Construction Management", "description": "Hands-on supervision and quality control across every phase of the build cycle." }
+    ]
+  },
+  "whyUs": {
+    "label": "Why Bridgeway",
+    "heading": "The Difference Investors Trust",
+    "items": [
+      { "title": "Lahore Market Knowledge", "description": "Deep, local insight into the city's most promising locations and emerging corridors." },
+      { "title": "Quality Construction", "description": "Premium materials, certified engineering and rigorous standards on every project." },
+      { "title": "Transparent Process", "description": "Clear pricing, honest timelines and open communication from first meeting to handover." },
+      { "title": "Modern Architecture", "description": "Forward-looking design that blends aesthetics, functionality and lasting value." },
+      { "title": "Reliable Delivery", "description": "A disciplined record of completing developments on schedule and to specification." },
+      { "title": "Investor-Focused", "description": "Developments structured to protect capital and deliver strong, sustainable returns." }
+    ]
+  },
+  "process": {
+    "label": "Our Process",
+    "heading": "From Site to Handover",
+    "items": [
+      { "num": "01", "title": "Site Planning", "description": "Location analysis, feasibility studies and master planning." },
+      { "num": "02", "title": "Design & Architecture", "description": "Detailed design and engineering balancing beauty and safety." },
+      { "num": "03", "title": "Construction", "description": "Skilled execution using premium materials and modern methods." },
+      { "num": "04", "title": "Quality Inspection", "description": "Multi-stage quality assurance at every milestone." },
+      { "num": "05", "title": "Handover", "description": "A seamless, documented handover of a move-in ready development." }
+    ]
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "heading": "Trusted by Homeowners & Investors",
+    "items": [
+      { "quote": "Bridgeway delivered our apartment exactly as promised — on time, beautifully finished and structurally flawless. Their transparency gave us real confidence.", "name": "Imran Sheikh", "role": "Homeowner, Bridgeway Heights" },
+      { "quote": "As an investor, I value reliability above all. Bridgeway's disciplined delivery and clear reporting made them an easy partner to trust with significant capital.", "name": "Ayesha Malik", "role": "Property Investor" },
+      { "quote": "The quality of construction at Bridgeway Residences is genuinely premium. It is rare to find a Lahore developer this committed to standards.", "name": "Usman Tariq", "role": "Business Owner & Buyer" }
+    ]
+  },
+  "contact": {
+    "label": "Get In Touch",
+    "heading": "Start Your Project<br />With Us",
+    "intro": "Have a development, apartment or construction project in mind? Our Lahore team is ready to help you plan, build and invest with confidence.",
+    "phone": "+92 300 123 4567",
+    "email": "info@bridgewaydevelopers.pk",
+    "address": "Main Boulevard, Gulberg III, Lahore, Pakistan",
+    "mapEmbed": "https://www.openstreetmap.org/export/embed.html?bbox=74.30%2C31.49%2C74.38%2C31.55&layer=mapnik&marker=31.52%2C74.34"
+  },
+  "footer": {
+    "brandText": "BRIDGEWAY",
+    "description": "A Lahore-based real estate development and construction company building premium apartments, residential communities and commercial landmarks.",
+    "socials": [
+      { "label": "Facebook", "url": "#" },
+      { "label": "Instagram", "url": "#" },
+      { "label": "LinkedIn", "url": "#" }
+    ]
+  }
+}

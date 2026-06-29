@@ -29,3 +29,12 @@ pnpm-debug.log*
 
 # Vite cache
 .vite
+
+# Backend runtime state (regenerated from data/seed.json)
+data/draft.json
+data/published.json
+data/auth.json
+
+# Uploaded media (served from /uploads)
+uploads/*
+!uploads/.gitkeep

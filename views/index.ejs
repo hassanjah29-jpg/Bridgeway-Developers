@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= c.site.title %></title>
+    <meta name="description" content="<%= c.site.metaDescription %>" />
+    <meta name="theme-color" content="<%= c.site.themeColor %>" />
+    <meta name="author" content="<%= c.site.brandName %>" />
+    <meta name="keywords" content="<%= c.site.metaKeywords %>" />
+    <link rel="canonical" href="https://bridgewaydevelopers.pk/" />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="<%= c.site.brandName %>" />
+    <meta property="og:title" content="<%= c.site.title %>" />
+    <meta property="og:description" content="<%= c.site.metaDescription %>" />
+    <meta property="og:image" content="logo.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<%= c.site.title %>" />
+    <meta name="twitter:description" content="<%= c.site.metaDescription %>" />
+    <meta name="twitter:image" content="logo.png" />
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <% if (preview) { %>
+    <div style="position:fixed;z-index:9999;bottom:18px;left:18px;background:#16273d;color:#f7e98e;padding:10px 16px;border-radius:30px;font:600 13px/1 Inter,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.3)">
+      Preview — unpublished draft · <a href="/admin" style="color:#fff;text-decoration:underline">back to admin</a>
+    </div>
+    <% } %>
+
+    <!-- ============ INTRO LOADER ============ -->
+    <div class="loader" id="loader" role="status" aria-label="Loading Bridgeway Developers">
+      <svg class="loader-svg" viewBox="0 0 465 312" aria-hidden="true">
+        <defs><linearGradient id="bwGradLoad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7e98e"/><stop offset="0.5" stop-color="#e6c558"/><stop offset="1" stop-color="#c79a3a"/></linearGradient></defs>
+        <path class="logo-fill" fill="url(#bwGradLoad)" d="M 57.500 22.959 C 39.079 23.457, 40.619 23.547, 77 24.100 C 112.315 24.636, 116.977 24.895, 121 26.552 C 138.181 33.627, 146.161 47.118, 147.666 71.634 C 148.848 90.883, 140.680 113, 132.389 113 C 127.597 113, 104.077 118.420, 92.671 122.153 C 81.397 125.843, 62.359 134.299, 54.293 139.199 C 50.852 141.290, 47.616 143, 47.101 143 C 46.587 143, 46.017 143.369, 45.833 143.819 C 45.650 144.270, 42.618 146.584, 39.095 148.962 C 32.798 153.212, 30.070 155.273, 27.460 157.750 C 26.735 158.438, 25.861 159, 25.517 159 C 25.173 159, 23.453 160.357, 21.696 162.015 C 16.973 166.472, 19.735 167.733, 25.884 163.927 C 45.566 151.747, 70.747 143.179, 111 134.967 C 135.021 130.066, 136.313 130.250, 145.170 139.817 C 153.363 148.666, 156.981 160.065, 156.994 177.066 C 157.014 202.927, 144.532 219.842, 122.413 223.932 C 119.172 224.531, 99.041 224.988, 74.449 225.022 C 50.442 225.054, 31.828 225.470, 31.512 225.981 C 30.446 227.706, 116.603 228.665, 126.210 227.035 C 160.867 221.153, 182.094 201.588, 181.964 175.645 C 181.896 161.856, 178.079 152.445, 168.476 142.384 C 166.577 140.394, 154.192 132.196, 152.066 131.521 C 144.322 129.063, 160.640 126.795, 196.500 125.344 L 211.500 124.738 214.348 132.619 C 219.243 146.169, 219.676 147.372, 221.489 152.500 C 222.462 155.250, 225.922 164.925, 229.180 174 C 232.437 183.075, 235.457 191.853, 235.891 193.507 C 236.325 195.161, 237.173 197.411, 237.775 198.507 C 238.378 199.603, 240.289 204.775, 242.021 210 C 247.292 225.894, 246.757 225, 251 225 C 254.323 225, 254.898 224.624, 255.973 221.750 C 257.260 218.312, 258.334 215.494, 262.361 205 C 263.732 201.425, 266.039 194.900, 267.487 190.500 C 268.934 186.100, 270.707 181.150, 271.426 179.500 C 272.145 177.850, 273.536 174.025, 274.518 171 C 275.500 167.975, 276.853 164.150, 277.525 162.500 C 278.196 160.850, 281.122 152.750, 284.027 144.500 C 286.931 136.250, 289.600 129.161, 289.957 128.747 C 290.534 128.077, 296.104 128.594, 312.407 130.828 L 317.314 131.500 319.700 138 C 321.013 141.575, 323.178 147.650, 324.511 151.500 C 325.844 155.350, 327.883 160.975, 329.042 164 C 330.202 167.025, 331.522 170.625, 331.977 172 C 333.007 175.111, 340.604 196.162, 345.510 209.500 C 347.533 215, 349.640 220.737, 350.192 222.250 C 351.010 224.490, 351.806 225, 354.489 225 C 357.776 225, 357.790 224.978, 361.549 214.250 C 363.620 208.338, 365.969 201.925, 366.768 200 C 367.567 198.075, 368.579 195.150, 369.017 193.500 C 369.455 191.850, 371.664 185.550, 373.926 179.500 C 376.188 173.450, 379.426 164.450, 381.121 159.500 C 385.423 146.938, 385.342 147.054, 389.231 147.982 C 402.090 151.049, 426.167 164.791, 441.931 178.062 C 451.121 185.798, 448.450 181.576, 437.781 171.500 C 426.516 160.862, 419.448 154.978, 411.618 149.720 C 407.703 147.090, 404.350 144.503, 404.167 143.970 C 403.983 143.436, 403.216 143, 402.461 143 C 401.236 143, 396.799 140.439, 391.700 136.788 C 389.679 135.341, 389.843 134.729, 398.896 110 C 401.212 103.675, 404.712 93.775, 406.674 88 C 408.636 82.225, 410.577 77.050, 410.987 76.500 C 411.396 75.950, 411.972 74.375, 412.266 73 C 412.560 71.625, 413.777 68.025, 414.972 65 C 417.117 59.566, 421.893 46.262, 424.485 38.500 C 425.220 36.300, 426.567 32.753, 427.479 30.618 C 428.533 28.151, 428.789 26.389, 428.181 25.781 C 426.878 24.478, 426.416 25.379, 422.005 37.826 C 419.925 43.697, 416.409 53.450, 414.193 59.500 C 411.976 65.550, 408.064 76.350, 405.499 83.500 C 397.386 106.112, 390.988 123.388, 389.469 126.784 C 388.661 128.590, 388 130.690, 388 131.451 C 388 134.094, 385.446 133.640, 375.502 129.230 C 364.632 124.411, 350.744 119.552, 344.674 118.446 C 340.199 117.631, 340.628 118.436, 332.472 95.500 C 329.343 86.700, 324.770 73.875, 322.310 67 C 319.850 60.125, 316.335 50.225, 314.498 45 C 312.662 39.775, 310.269 33.250, 309.181 30.500 L 307.203 25.500 293.602 25.222 C 282.861 25.002, 280 25.221, 280 26.264 C 280 27.463, 285.307 42.963, 290.011 55.500 C 291.042 58.250, 293.987 66.415, 296.554 73.644 L 301.222 86.787 298.704 93.144 C 297.318 96.640, 295.608 101.459, 294.903 103.854 C 294.198 106.249, 293.049 108.428, 292.350 108.696 C 291.651 108.964, 282.399 108.480, 271.789 107.621 C 261.180 106.761, 248.131 105.768, 242.792 105.413 L 233.084 104.768 231.388 99.634 C 230.456 96.810, 228.612 91.575, 227.292 88 C 224.114 79.394, 215.881 56.437, 210.615 41.500 C 204.205 23.317, 206.260 25, 190.465 25 C 181.437 25, 177 25.358, 177 26.087 C 177 26.685, 178.856 32.422, 181.124 38.837 C 183.392 45.252, 187.387 56.575, 190.002 64 C 192.617 71.425, 195.749 80.200, 196.962 83.500 C 201.730 96.472, 204.043 104.121, 203.476 105.039 C 203.149 105.568, 201.221 105.997, 199.191 105.994 C 197.161 105.991, 187.282 106.736, 177.238 107.649 C 167.194 108.563, 158.701 109.035, 158.365 108.698 C 158.029 108.362, 159.642 105.942, 161.950 103.320 C 173.805 89.852, 176.250 66.861, 167.565 50.526 C 160.669 37.557, 150.475 29.920, 132.500 24.256 C 126.941 22.504, 94.823 21.948, 57.500 22.959 M 299.506 101.572 C 297.933 105.885, 297.122 109.511, 297.622 109.995 C 298.379 110.729, 304.947 111.377, 308.733 111.093 C 309.595 111.028, 309.197 108.962, 307.418 104.250 C 306.016 100.537, 304.621 96.713, 304.318 95.750 C 303.336 92.631, 302.318 93.862, 299.506 101.572 M 241 126.065 C 241 126.650, 241.942 129.463, 243.093 132.315 C 244.245 135.167, 245.637 138.625, 246.188 140 C 246.738 141.375, 248.467 146.325, 250.030 151 C 252.977 159.812, 259.963 179.445, 261.863 184.250 C 263.597 188.634, 264.556 187.586, 267.811 177.750 C 269.495 172.662, 274.052 160.037, 277.936 149.693 C 281.821 139.348, 285 130.090, 285 129.118 C 285 127.552, 283.199 127.216, 269.250 126.174 C 249.544 124.702, 241 124.669, 241 126.065 M 348 139.441 C 348 140.234, 348.396 141.127, 348.881 141.426 C 349.365 141.726, 349.991 142.990, 350.272 144.235 C 350.747 146.343, 359.509 171.277, 363.692 182.423 C 365.859 188.196, 367.502 189.194, 368.416 185.294 C 369.044 182.619, 372.231 173.709, 374.067 169.500 C 376.052 164.948, 381.247 149.360, 381.369 147.589 C 381.504 145.623, 379.920 144.898, 371.500 143.075 C 369.300 142.598, 363.900 141.269, 359.500 140.120 C 349.997 137.638, 348 137.520, 348 139.441"/>
+        <text class="lt" x="232" y="300" text-anchor="middle" fill="url(#bwGradLoad)" font-family="Jost, sans-serif" font-size="23" font-weight="400" letter-spacing="6"><%= c.site.brandName.toUpperCase() %></text>
+      </svg>
+    </div>
+
+    <!-- ============ NAVBAR ============ -->
+    <header class="navbar" id="navbar">
+      <div class="container nav-inner">
+        <a href="#home" class="logo" aria-label="Bridgeway Developers home">
+          <svg class="nav-logo" viewBox="0 0 465 248" aria-hidden="true"><defs><linearGradient id="bwGradNav" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c0922c"/><stop offset="1" stop-color="#8a641c"/></linearGradient></defs><path fill="url(#bwGradNav)" d="M 57.500 22.959 C 39.079 23.457, 40.619 23.547, 77 24.100 C 112.315 24.636, 116.977 24.895, 121 26.552 C 138.181 33.627, 146.161 47.118, 147.666 71.634 C 148.848 90.883, 140.680 113, 132.389 113 C 127.597 113, 104.077 118.420, 92.671 122.153 C 81.397 125.843, 62.359 134.299, 54.293 139.199 C 50.852 141.290, 47.616 143, 47.101 143 C 46.587 143, 46.017 143.369, 45.833 143.819 C 45.650 144.270, 42.618 146.584, 39.095 148.962 C 32.798 153.212, 30.070 155.273, 27.460 157.750 C 26.735 158.438, 25.861 159, 25.517 159 C 25.173 159, 23.453 160.357, 21.696 162.015 C 16.973 166.472, 19.735 167.733, 25.884 163.927 C 45.566 151.747, 70.747 143.179, 111 134.967 C 135.021 130.066, 136.313 130.250, 145.170 139.817 C 153.363 148.666, 156.981 160.065, 156.994 177.066 C 157.014 202.927, 144.532 219.842, 122.413 223.932 C 119.172 224.531, 99.041 224.988, 74.449 225.022 C 50.442 225.054, 31.828 225.470, 31.512 225.981 C 30.446 227.706, 116.603 228.665, 126.210 227.035 C 160.867 221.153, 182.094 201.588, 181.964 175.645 C 181.896 161.856, 178.079 152.445, 168.476 142.384 C 166.577 140.394, 154.192 132.196, 152.066 131.521 C 144.322 129.063, 160.640 126.795, 196.500 125.344 L 211.500 124.738 214.348 132.619 C 219.243 146.169, 219.676 147.372, 221.489 152.500 C 222.462 155.250, 225.922 164.925, 229.180 174 C 232.437 183.075, 235.457 191.853, 235.891 193.507 C 236.325 195.161, 237.173 197.411, 237.775 198.507 C 238.378 199.603, 240.289 204.775, 242.021 210 C 247.292 225.894, 246.757 225, 251 225 C 254.323 225, 254.898 224.624, 255.973 221.750 C 257.260 218.312, 258.334 215.494, 262.361 205 C 263.732 201.425, 266.039 194.900, 267.487 190.500 C 268.934 186.100, 270.707 181.150, 271.426 179.500 C 272.145 177.850, 273.536 174.025, 274.518 171 C 275.500 167.975, 276.853 164.150, 277.525 162.500 C 278.196 160.850, 281.122 152.750, 284.027 144.500 C 286.931 136.250, 289.600 129.161, 289.957 128.747 C 290.534 128.077, 296.104 128.594, 312.407 130.828 L 317.314 131.500 319.700 138 C 321.013 141.575, 323.178 147.650, 324.511 151.500 C 325.844 155.350, 327.883 160.975, 329.042 164 C 330.202 167.025, 331.522 170.625, 331.977 172 C 333.007 175.111, 340.604 196.162, 345.510 209.500 C 347.533 215, 349.640 220.737, 350.192 222.250 C 351.010 224.490, 351.806 225, 354.489 225 C 357.776 225, 357.790 224.978, 361.549 214.250 C 363.620 208.338, 365.969 201.925, 366.768 200 C 367.567 198.075, 368.579 195.150, 369.017 193.500 C 369.455 191.850, 371.664 185.550, 373.926 179.500 C 376.188 173.450, 379.426 164.450, 381.121 159.500 C 385.423 146.938, 385.342 147.054, 389.231 147.982 C 402.090 151.049, 426.167 164.791, 441.931 178.062 C 451.121 185.798, 448.450 181.576, 437.781 171.500 C 426.516 160.862, 419.448 154.978, 411.618 149.720 C 407.703 147.090, 404.350 144.503, 404.167 143.970 C 403.983 143.436, 403.216 143, 402.461 143 C 401.236 143, 396.799 140.439, 391.700 136.788 C 389.679 135.341, 389.843 134.729, 398.896 110 C 401.212 103.675, 404.712 93.775, 406.674 88 C 408.636 82.225, 410.577 77.050, 410.987 76.500 C 411.396 75.950, 411.972 74.375, 412.266 73 C 412.560 71.625, 413.777 68.025, 414.972 65 C 417.117 59.566, 421.893 46.262, 424.485 38.500 C 425.220 36.300, 426.567 32.753, 427.479 30.618 C 428.533 28.151, 428.789 26.389, 428.181 25.781 C 426.878 24.478, 426.416 25.379, 422.005 37.826 C 419.925 43.697, 416.409 53.450, 414.193 59.500 C 411.976 65.550, 408.064 76.350, 405.499 83.500 C 397.386 106.112, 390.988 123.388, 389.469 126.784 C 388.661 128.590, 388 130.690, 388 131.451 C 388 134.094, 385.446 133.640, 375.502 129.230 C 364.632 124.411, 350.744 119.552, 344.674 118.446 C 340.199 117.631, 340.628 118.436, 332.472 95.500 C 329.343 86.700, 324.770 73.875, 322.310 67 C 319.850 60.125, 316.335 50.225, 314.498 45 C 312.662 39.775, 310.269 33.250, 309.181 30.500 L 307.203 25.500 293.602 25.222 C 282.861 25.002, 280 25.221, 280 26.264 C 280 27.463, 285.307 42.963, 290.011 55.500 C 291.042 58.250, 293.987 66.415, 296.554 73.644 L 301.222 86.787 298.704 93.144 C 297.318 96.640, 295.608 101.459, 294.903 103.854 C 294.198 106.249, 293.049 108.428, 292.350 108.696 C 291.651 108.964, 282.399 108.480, 271.789 107.621 C 261.180 106.761, 248.131 105.768, 242.792 105.413 L 233.084 104.768 231.388 99.634 C 230.456 96.810, 228.612 91.575, 227.292 88 C 224.114 79.394, 215.881 56.437, 210.615 41.500 C 204.205 23.317, 206.260 25, 190.465 25 C 181.437 25, 177 25.358, 177 26.087 C 177 26.685, 178.856 32.422, 181.124 38.837 C 183.392 45.252, 187.387 56.575, 190.002 64 C 192.617 71.425, 195.749 80.200, 196.962 83.500 C 201.730 96.472, 204.043 104.121, 203.476 105.039 C 203.149 105.568, 201.221 105.997, 199.191 105.994 C 197.161 105.991, 187.282 106.736, 177.238 107.649 C 167.194 108.563, 158.701 109.035, 158.365 108.698 C 158.029 108.362, 159.642 105.942, 161.950 103.320 C 173.805 89.852, 176.250 66.861, 167.565 50.526 C 160.669 37.557, 150.475 29.920, 132.500 24.256 C 126.941 22.504, 94.823 21.948, 57.500 22.959 M 299.506 101.572 C 297.933 105.885, 297.122 109.511, 297.622 109.995 C 298.379 110.729, 304.947 111.377, 308.733 111.093 C 309.595 111.028, 309.197 108.962, 307.418 104.250 C 306.016 100.537, 304.621 96.713, 304.318 95.750 C 303.336 92.631, 302.318 93.862, 299.506 101.572 M 241 126.065 C 241 126.650, 241.942 129.463, 243.093 132.315 C 244.245 135.167, 245.637 138.625, 246.188 140 C 246.738 141.375, 248.467 146.325, 250.030 151 C 252.977 159.812, 259.963 179.445, 261.863 184.250 C 263.597 188.634, 264.556 187.586, 267.811 177.750 C 269.495 172.662, 274.052 160.037, 277.936 149.693 C 281.821 139.348, 285 130.090, 285 129.118 C 285 127.552, 283.199 127.216, 269.250 126.174 C 249.544 124.702, 241 124.669, 241 126.065 M 348 139.441 C 348 140.234, 348.396 141.127, 348.881 141.426 C 349.365 141.726, 349.991 142.990, 350.272 144.235 C 350.747 146.343, 359.509 171.277, 363.692 182.423 C 365.859 188.196, 367.502 189.194, 368.416 185.294 C 369.044 182.619, 372.231 173.709, 374.067 169.500 C 376.052 164.948, 381.247 149.360, 381.369 147.589 C 381.504 145.623, 379.920 144.898, 371.500 143.075 C 369.300 142.598, 363.900 141.269, 359.500 140.120 C 349.997 137.638, 348 137.520, 348 139.441"/></svg>
+        </a>
+
+        <nav class="nav-links" id="navLinks" aria-label="Primary">
+          <a href="#about">About Us</a>
+          <a href="#projects">Projects</a>
+          <a href="#services">Services</a>
+          <a href="#why-us">Why Us</a>
+          <a href="#process">Process</a>
+        </nav>
+
+        <div class="nav-right">
+          <span class="nav-lang">ENG ▾</span>
+          <a href="tel:<%= c.contact.phone.replace(/\s/g, '') %>" class="nav-icon" aria-label="Call us">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          </a>
+          <a href="#contact" class="btn-navy nav-cta">Get In Touch</a>
+          <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="home">
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"
+          poster="<%= c.hero.poster %>">
+          <source src="<%= c.hero.video %>" type="video/mp4" />
+        </video>
+        <div class="hero-overlay" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <span class="hero-eyebrow"><%= c.hero.eyebrow %></span>
+          <h1 class="hero-title"><%= c.hero.title %></h1>
+          <p class="hero-tagline"><%= c.hero.tagline %></p>
+        </div>
+
+        <form class="search-bar" id="searchBar" aria-label="Property search">
+          <div class="search-field">
+            <label>Property Type</label>
+            <select>
+              <option>Apartment</option><option>Villa / House</option><option>Commercial</option><option>Plot</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label>Bedrooms</label>
+            <select><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+          </div>
+          <div class="search-field">
+            <label>Price Range</label>
+            <select><option>Any</option><option>Up to 1 Cr</option><option>1 – 3 Cr</option><option>3 Cr+</option></select>
+          </div>
+          <div class="search-field">
+            <label>Community</label>
+            <select><option>DHA</option><option>Bahria Town</option><option>Gulberg</option><option>Johar Town</option></select>
+          </div>
+          <button type="submit" class="btn-navy search-btn">Search Properties</button>
+        </form>
+
+        <a href="#about" class="hero-scroll" aria-label="Scroll down">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+        <button class="hero-mute" id="heroMute" aria-label="Toggle sound">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+      </section>
+
+      <!-- ============ INTRO / ABOUT ============ -->
+      <section class="section intro" id="about">
+        <div class="container">
+          <% c.about.leadParagraphs.forEach(function(p){ %>
+          <p class="intro-lead reveal"><%= p %></p>
+          <% }); %>
+
+          <div class="intro-stats reveal">
+            <% c.about.stats.forEach(function(s){ %>
+            <div class="istat"><span class="istat-num" data-target="<%= s.target %>" data-suffix="<%= s.suffix %>">0</span><span class="istat-label"><%= s.label %></span></div>
+            <% }); %>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FEATURED PROJECTS (carousel) ============ -->
+      <section class="section projects" id="projects">
+        <div class="container">
+          <div class="label reveal"><%= c.projects.label %> <span class="label-line"></span></div>
+          <div class="section-bar reveal">
+            <h2 class="section-title"><%= c.projects.heading %></h2>
+            <div class="carousel-nav">
+              <button class="carousel-arrow" id="prevProj" aria-label="Previous">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button class="carousel-arrow" id="nextProj" aria-label="Next">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel" id="projCarousel">
+          <% c.projects.items.forEach(function(p){ %>
+          <article class="slide">
+            <div class="slide-img">
+              <% if (p.video) { %>
+              <video src="<%= p.video %>" muted loop playsinline autoplay poster="<%= p.image %>"></video>
+              <% } else { %>
+              <img src="<%= p.image %>" alt="<%= p.title %>" loading="lazy" />
+              <% } %>
+              <% if (p.status) { %><span class="slide-status"><%= p.status %></span><% } %>
+            </div>
+            <div class="slide-body"><span class="slide-type"><%= p.type %></span><h3><%= p.title %></h3><p><%= p.description %></p><a href="#contact" class="slide-link">Enquire →</a></div>
+          </article>
+          <% }); %>
+        </div>
+      </section>
+
+      <!-- ============ SERVICES ============ -->
+      <section class="section services" id="services">
+        <div class="container">
+          <div class="label reveal"><%= c.services.label %> <span class="label-line"></span></div>
+          <h2 class="section-title reveal"><%= c.services.heading %></h2>
+          <div class="svc-grid">
+            <% c.services.items.forEach(function(s){ %>
+            <article class="svc reveal"><span class="svc-no"><%= s.no %></span><h3><%= s.title %></h3><p><%= s.description %></p></article>
+            <% }); %>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WHY CHOOSE US ============ -->
+      <section class="section why-us" id="why-us">
+        <div class="container">
+          <div class="label reveal"><%= c.whyUs.label %> <span class="label-line"></span></div>
+          <h2 class="section-title reveal"><%= c.whyUs.heading %></h2>
+          <div class="why-grid">
+            <% c.whyUs.items.forEach(function(w){ %>
+            <div class="why reveal"><h3><%= w.title %></h3><p><%= w.description %></p></div>
+            <% }); %>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROCESS ============ -->
+      <section class="section process" id="process">
+        <div class="container">
+          <div class="label reveal"><%= c.process.label %> <span class="label-line"></span></div>
+          <h2 class="section-title reveal"><%= c.process.heading %></h2>
+          <div class="steps">
+            <% c.process.items.forEach(function(s){ %>
+            <div class="step reveal"><span class="step-num"><%= s.num %></span><h3><%= s.title %></h3><p><%= s.description %></p></div>
+            <% }); %>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TESTIMONIALS ============ -->
+      <section class="section testimonials">
+        <div class="container">
+          <div class="label reveal"><%= c.testimonials.label %> <span class="label-line"></span></div>
+          <h2 class="section-title reveal"><%= c.testimonials.heading %></h2>
+          <div class="quote-grid">
+            <% c.testimonials.items.forEach(function(t){ %>
+            <figure class="quote reveal"><blockquote><%= t.quote %></blockquote><figcaption><strong><%= t.name %></strong><span><%= t.role %></span></figcaption></figure>
+            <% }); %>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section class="section contact" id="contact">
+        <div class="container contact-grid">
+          <div class="contact-intro">
+            <div class="label"><%= c.contact.label %> <span class="label-line"></span></div>
+            <h2 class="section-title"><%- c.contact.heading %></h2>
+            <p><%= c.contact.intro %></p>
+            <ul class="contact-list">
+              <li><span>Call</span><a href="tel:<%= c.contact.phone.replace(/\s/g, '') %>"><%= c.contact.phone %></a></li>
+              <li><span>Email</span><a href="mailto:<%= c.contact.email %>"><%= c.contact.email %></a></li>
+              <li><span>Visit</span><address><%= c.contact.address %></address></li>
+            </ul>
+          </div>
+
+          <div class="contact-form-wrap">
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="field"><label for="name">Full Name</label><input type="text" id="name" name="name" placeholder="Your name" /><small class="err"></small></div>
+                <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="+92 3xx xxxxxxx" /><small class="err"></small></div>
+              </div>
+              <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="you@example.com" /><small class="err"></small></div>
+              <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="4" placeholder="Tell us about your project..."></textarea><small class="err"></small></div>
+              <button type="submit" class="btn-navy full">Send Enquiry</button>
+            </form>
+            <div class="form-success" id="formSuccess" hidden>
+              <span class="success-icon">✓</span>
+              <h3>Thank you — enquiry received</h3>
+              <p>Our team will get back to you within one business day.</p>
+              <button type="button" class="btn-outline-dark" id="resetForm">Send another message</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="map" id="map">
+          <iframe title="Bridgeway Developers location in Lahore"
+            src="<%= c.contact.mapEmbed %>"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <span class="logo-text footer-logo"><%= c.footer.brandText %></span>
+          <p><%= c.footer.description %></p>
+        </div>
+        <div class="footer-col"><h4>Company</h4><a href="#about">About Us</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#why-us">Why Us</a></div>
+        <div class="footer-col"><h4>Services</h4><a href="#services">Development</a><a href="#services">Apartments</a><a href="#services">Residential</a><a href="#services">Commercial</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="tel:<%= c.contact.phone.replace(/\s/g, '') %>"><%= c.contact.phone %></a><a href="mailto:<%= c.contact.email %>"><%= c.contact.email %></a><span><%= c.contact.address %></span></div>
+      </div>
+      <div class="footer-bottom container">
+        <p>© <span id="year"></span> <%= c.site.brandName %>. All rights reserved.</p>
+        <p class="footer-socials"><% c.footer.socials.forEach(function(s){ %><a href="<%= s.url %>"><%= s.label %></a><% }); %></p>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    <script src="script.js"></script>
+  </body>
+</html>
