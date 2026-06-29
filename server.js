@@ -189,7 +189,7 @@ app.get('/projects/:id', (req, res) => {
   // sequence hero (the building animates as you scroll).
   if (/pearl\s*one/i.test(project.title || '')) {
     project = Object.assign({}, project, {
-      sequence: { base: '/media/pearl-seq/frame-', pad: 3, ext: '.jpg', count: 120, poster: '/media/pearl-seq/frame-001.jpg' }
+      sequence: { base: '/media/pearl-seq/frame-', pad: 3, ext: '.jpg', count: 300, poster: '/media/pearl-seq/frame-001.jpg' }
     });
   }
   res.render('project', { c: content, project, preview: isPreview });
