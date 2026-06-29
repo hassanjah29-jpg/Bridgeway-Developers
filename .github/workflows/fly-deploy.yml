@@ -1,6 +1,6 @@
 name: Deploy to Fly.io
 
-# Auto-deploys to Fly.io on every push to the deploy branch.
+# Auto-deploys to Fly.io on every push to main.
 on:
   push:
     branches:
@@ -11,14 +11,26 @@ jobs:
     name: Deploy app
     runs-on: ubuntu-latest
     concurrency: deploy-group   # prevents overlapping deploys
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      # --ha=false runs a single machine (a CMS must not split content
-      # across machines). Scale to 1 first so the deploy needs only 1 volume.
-      - run: flyctl scale count 1 --yes
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      - run: flyctl deploy --remote-only --ha=false
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      # A file-backed CMS runs ONE machine with ONE persistent volume.
+      # Create the volume automatically if it doesn't already exist.
+      - name: Ensure the data volume exists
+        run: |
+          have=$(flyctl volumes list --json | jq '[.[] | select(.name=="bridgeway_data")] | length')
+          echo "Existing bridgeway_data volumes: $have"
+          if [ "$have" -lt 1 ]; then
+            echo "Creating volume bridgeway_data in sin..."
+            flyctl volumes create bridgeway_data --region sin --count 1 --yes
+          fi
+
+      # Keep the app at a single machine so it needs only one volume.
+      - name: Scale to one machine
+        run: flyctl scale count 1 --yes
+
+      - name: Deploy
+        run: flyctl deploy --remote-only --ha=false
