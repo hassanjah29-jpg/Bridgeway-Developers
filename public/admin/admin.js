@@ -28,6 +28,9 @@
     if (attrs) Object.keys(attrs).forEach(function (k) {
       if (k === 'class') n.className = attrs[k];
       else if (k === 'html') n.innerHTML = attrs[k];
+      // Set value as a PROPERTY so it works for <textarea> too (the value
+      // attribute is ignored by textarea, which left multi-line fields blank).
+      else if (k === 'value') n.value = attrs[k] == null ? '' : attrs[k];
       else if (k.slice(0, 2) === 'on' && typeof attrs[k] === 'function') n.addEventListener(k.slice(2), attrs[k]);
       else if (attrs[k] != null) n.setAttribute(k, attrs[k]);
     });
