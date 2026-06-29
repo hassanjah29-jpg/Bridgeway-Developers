@@ -138,10 +138,28 @@
   });
 
   /* ---------------- media upload + picker ---------------- */
-  function uploadFile(file) {
-    var fd = new FormData();
-    fd.append('file', file);
-    return api('POST', '/api/admin/upload', fd, true);
+  function uploadFile(file, onProgress) {
+    return new Promise(function (resolve, reject) {
+      var fd = new FormData();
+      fd.append('file', file);
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/admin/upload');
+      xhr.timeout = 15 * 60 * 1000; // 15 min for large videos
+      xhr.upload.onprogress = function (e) {
+        if (e.lengthComputable && typeof onProgress === 'function') {
+          onProgress(Math.round((e.loaded / e.total) * 100));
+        }
+      };
+      xhr.onload = function () {
+        var j; try { j = JSON.parse(xhr.responseText); } catch (e) { j = {}; }
+        if (xhr.status >= 200 && xhr.status < 300) resolve(j);
+        else if (xhr.status === 401) { location.href = '/admin/login'; reject(new Error('Not authenticated')); }
+        else reject(new Error(j.error || ('Upload failed (' + xhr.status + ')')));
+      };
+      xhr.onerror = function () { reject(new Error('Network error during upload')); };
+      xhr.ontimeout = function () { reject(new Error('Upload timed out — file may be too large or the connection too slow.')); };
+      xhr.send(fd);
+    });
   }
   // A reusable image/video picker bound to obj[prop]
   function mediaField(label, obj, prop, opts) {
@@ -164,10 +182,10 @@
       onchange: function () {
         if (!fileInput.files[0]) return;
         toast('Uploading…');
-        uploadFile(fileInput.files[0]).then(function (res) {
+        uploadFile(fileInput.files[0], function (pct) { toast('Uploading — ' + pct + '%'); }).then(function (res) {
           obj[prop] = res.url; urlInput.value = res.url; paint();
           if (opts.onChange) opts.onChange();
-          toast('Uploaded', 'ok');
+          toast('Uploaded', 'ok'); fileInput.value = '';
         }).catch(function (e) { toast(e.message, 'err'); });
       }
     });
@@ -322,10 +340,15 @@
       onchange: function () {
         var files = Array.prototype.slice.call(galUpload.files);
         if (!files.length) return;
+        var done = 0;
         toast('Uploading ' + files.length + ' file(s)…');
-        Promise.all(files.map(uploadFile)).then(function (res) {
+        Promise.all(files.map(function (f) {
+          return uploadFile(f, function (pct) { toast('Uploading ' + (done + 1) + '/' + files.length + ' — ' + pct + '%'); })
+            .then(function (r) { done++; return r; });
+        })).then(function (res) {
           res.forEach(function (r) { p.gallery.push(r.url); });
           paintGal(); scheduleSave('projects'); toast('Added to gallery', 'ok');
+          galUpload.value = '';
         }).catch(function (e) { toast(e.message, 'err'); });
       }
     });
@@ -553,8 +576,11 @@
       onchange: function () {
         var files = Array.prototype.slice.call(dropUpload.files);
         if (!files.length) return;
+        var done = 0;
         toast('Uploading…');
-        Promise.all(files.map(uploadFile)).then(function () { load(); toast('Uploaded', 'ok'); }).catch(function (e) { toast(e.message, 'err'); });
+        Promise.all(files.map(function (f) {
+          return uploadFile(f, function (pct) { toast('Uploading ' + (done + 1) + '/' + files.length + ' — ' + pct + '%'); }).then(function (r) { done++; return r; });
+        })).then(function () { load(); toast('Uploaded', 'ok'); dropUpload.value = ''; }).catch(function (e) { toast(e.message, 'err'); });
       }
     });
     function load() {

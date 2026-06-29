@@ -59,6 +59,18 @@ if (!fs.existsSync(DRAFT_FILE)) {
   writeJSON(DRAFT_FILE, { content: pub.content, updatedAt: null });
 }
 
+// One-time: align the editor draft with the live (published) site so the admin
+// shows all current website text. Runs exactly once (guarded by a marker file).
+const SYNC_MARKER = path.join(STATE_DIR, '.draft-synced-1');
+if (!fs.existsSync(SYNC_MARKER)) {
+  try {
+    const pub = readJSON(PUBLISHED_FILE, { content: seed });
+    writeJSON(DRAFT_FILE, { content: pub.content, updatedAt: new Date().toISOString() });
+    fs.writeFileSync(SYNC_MARKER, '1');
+    console.log('   ↻ Draft synced to live content (one-time).');
+  } catch (e) { /* non-fatal */ }
+}
+
 function getPublished() {
   return readJSON(PUBLISHED_FILE, { content: seed, lastPublished: null });
 }
