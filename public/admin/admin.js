@@ -334,10 +334,41 @@
       return el('div', { class: 'fld' }, [el('label', {}, ['Status Badge']), sel]);
     }
 
+    // --- Project page: specs (label/value) ---
+    if (!p.details) p.details = [];
+    var detailsWrap = el('div');
+    function paintDetails() {
+      detailsWrap.innerHTML = '';
+      p.details.forEach(function (d, di) {
+        var lab = el('input', { type: 'text', value: d.label || '', placeholder: 'Label (e.g. Floors)', oninput: function () { d.label = lab.value; scheduleSave('projects'); } });
+        var val = el('input', { type: 'text', value: d.value || '', placeholder: 'Value (e.g. 14)', oninput: function () { d.value = val.value; scheduleSave('projects'); } });
+        detailsWrap.appendChild(el('div', { class: 'field-row', style: 'margin-bottom:8px;align-items:center' }, [
+          el('div', { class: 'fld', style: 'margin:0' }, [lab]),
+          el('div', { class: 'fld', style: 'margin:0;display:flex;gap:6px' }, [val,
+            el('button', { class: 'mini-btn danger', onclick: function () { p.details.splice(di, 1); paintDetails(); scheduleSave('projects'); } }, ['×'])])
+        ]));
+      });
+    }
+    paintDetails();
+
+    // --- Project page: key features ---
+    if (!p.features) p.features = [];
+    var featWrap = el('div');
+    function paintFeats() {
+      featWrap.innerHTML = '';
+      p.features.forEach(function (ft, fi) {
+        var inp = el('input', { type: 'text', value: ft, placeholder: 'Feature / amenity', oninput: function () { p.features[fi] = inp.value; scheduleSave('projects'); } });
+        featWrap.appendChild(el('div', { class: 'fld', style: 'margin-bottom:6px;display:flex;gap:6px' }, [inp,
+          el('button', { class: 'mini-btn danger', onclick: function () { p.features.splice(fi, 1); paintFeats(); scheduleSave('projects'); } }, ['×'])]));
+      });
+    }
+    paintFeats();
+
     return el('div', { class: 'item-card' }, [
       el('div', { class: 'item-head' }, [
         el('strong', {}, ['📦 ' + (p.title || 'Untitled')]),
         el('div', { class: 'item-actions' }, [
+          el('a', { class: 'mini-btn', href: '/projects/' + p.id, target: '_blank', title: 'Open the project page' }, ['↗ Page']),
           i > 0 ? el('button', { class: 'mini-btn', title: 'Move up', onclick: function () { swap(pr.items, i, i - 1); repaint(); scheduleSave('projects'); } }, ['↑']) : null,
           i < pr.items.length - 1 ? el('button', { class: 'mini-btn', title: 'Move down', onclick: function () { swap(pr.items, i, i + 1); repaint(); scheduleSave('projects'); } }, ['↓']) : null,
           el('button', { class: 'mini-btn danger', onclick: function () { if (confirm('Delete this project?')) { pr.items.splice(i, 1); repaint(); scheduleSave('projects'); } } }, ['Delete'])
@@ -345,11 +376,22 @@
       ]),
       el('div', { class: 'field-row' }, [f('Title', 'title'), f('Type / Location', 'type')]),
       statusSelect(),
-      f('Description', 'description', true),
-      mediaField('Cover Image', p, 'image', { accept: 'image/*', onChange: function () { scheduleSave('projects'); } }),
-      mediaField('Cover Video (optional — replaces image in carousel)', p, 'video', { accept: 'video/*', onChange: function () { scheduleSave('projects'); } }),
+      f('Short Description (shown on the card)', 'description', true),
+      f('Detailed Description — for the project page (one paragraph per line)', 'longDescription', true),
       el('div', { class: 'fld' }, [
-        el('label', {}, ['Photo / Video Gallery']),
+        el('label', {}, ['Project Details / Specs']),
+        detailsWrap,
+        el('button', { class: 'mini-btn', onclick: function () { p.details.push({ label: '', value: '' }); paintDetails(); scheduleSave('projects'); } }, ['+ Add detail'])
+      ]),
+      el('div', { class: 'fld' }, [
+        el('label', {}, ['Key Features']),
+        featWrap,
+        el('button', { class: 'mini-btn', onclick: function () { p.features.push(''); paintFeats(); scheduleSave('projects'); } }, ['+ Add feature'])
+      ]),
+      mediaField('Cover Image', p, 'image', { accept: 'image/*', onChange: function () { scheduleSave('projects'); } }),
+      mediaField('Cover Video (optional — replaces image in carousel & hero)', p, 'video', { accept: 'video/*', onChange: function () { scheduleSave('projects'); } }),
+      el('div', { class: 'fld' }, [
+        el('label', {}, ['Photo / Video Gallery (shown on the project page)']),
         gal,
         el('label', { class: 'upload-btn', style: 'margin-top:8px;display:inline-block' }, ['⬆ Add gallery media', galUpload])
       ])

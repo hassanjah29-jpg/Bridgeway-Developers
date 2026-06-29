@@ -328,3 +328,81 @@ a { text-decoration: none; color: inherit; }
   .loader-svg .lt { animation: none; opacity: 1; }
   .loader { animation: loaderHide 0.5s ease 2.2s forwards; }
 }
+
+/* ===================================================================
+   Dedicated project page (/projects/:id) + 3D construction animations
+   =================================================================== */
+.pp { padding-top: 76px; }
+
+/* Hero */
+.pp-hero { position: relative; height: 78svh; min-height: 480px; display: flex; align-items: flex-end; overflow: hidden; background: var(--navy-dark); }
+.pp-hero-media { position: absolute; top: -15%; left: 0; right: 0; height: 130%; will-change: transform; }
+.pp-hero-media img, .pp-hero-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pp-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,15,24,0.88) 0%, rgba(8,15,24,0.25) 55%, rgba(8,15,24,0.45) 100%); }
+.pp-hero-inner { position: relative; z-index: 2; color: #fff; padding-bottom: 3.5rem; width: 100%; }
+.pp-back { display: inline-block; font-family: var(--display); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 1.5rem; transition: color .25s; }
+.pp-back:hover { color: #fff; }
+.pp-status { display: inline-block; background: rgba(255,255,255,0.95); color: var(--ink); font-family: var(--display); font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; padding: 0.4rem 0.9rem; margin-bottom: 1rem; }
+.pp-type { display: block; font-family: var(--display); font-size: 0.8rem; letter-spacing: 0.28em; text-transform: uppercase; color: #d9b978; margin-bottom: 0.5rem; }
+.pp-title { font-family: var(--display); font-weight: 300; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.05; font-size: clamp(2.1rem, 6vw, 4.5rem); text-shadow: 0 2px 30px rgba(0,0,0,0.4); }
+
+/* Overview */
+.pp-overview-grid { display: grid; grid-template-columns: 1.7fr 1fr; gap: 4rem; align-items: start; }
+.pp-lead { font-family: var(--display); font-weight: 300; font-size: clamp(1.05rem, 1.8vw, 1.35rem); line-height: 1.7; color: var(--ink); margin-bottom: 1.25rem; }
+.pp-lead + .pp-lead { color: var(--ink-soft); }
+.pp-specs { background: var(--bg-soft); padding: 2rem; border-top: 2px solid var(--navy); }
+.pp-specs h3 { font-family: var(--display); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 1rem; margin-bottom: 1.25rem; }
+.pp-specs ul { list-style: none; }
+.pp-specs li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.85rem 0; border-top: 1px solid var(--line); }
+.pp-specs li:first-child { border-top: none; }
+.pp-spec-label { font-family: var(--display); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-faint); }
+.pp-spec-value { font-size: 0.92rem; color: var(--ink); font-weight: 500; text-align: right; }
+
+/* Features */
+.pp-features { background: var(--bg-soft); }
+.pp-features .section-title { margin-bottom: 2.5rem; }
+.pp-feature-grid { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem 2.5rem; }
+.pp-feature-grid li { display: flex; gap: 0.85rem; align-items: baseline; padding-top: 1.1rem; border-top: 1px solid var(--line); font-size: 0.95rem; color: var(--ink); }
+.pp-feat-ic { color: var(--accent); }
+
+/* Gallery — 3D assembly */
+.pp-gallery-sec .section-title { margin-bottom: 2.5rem; }
+.pp-stage { perspective: 1500px; }
+.pp-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; padding: 0 2rem; max-width: 1280px; margin: 0 auto; transform-style: preserve-3d; }
+.pp-tile { overflow: hidden; background: var(--bg-soft); aspect-ratio: 4 / 3; }
+.pp-tile:nth-child(6n+1) { grid-column: span 2; aspect-ratio: 16 / 9; }
+.pp-tile img, .pp-tile video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
+.pp-tile:hover img, .pp-tile:hover video { transform: scale(1.05); }
+
+/* CTA */
+.pp-cta { text-align: center; background: var(--navy-dark); color: #fff; }
+.pp-cta-inner h2 { font-family: var(--display); font-weight: 300; text-transform: uppercase; letter-spacing: 0.1em; font-size: clamp(1.6rem, 3.5vw, 2.5rem); }
+.pp-cta-inner p { margin: 1rem auto 2rem; color: rgba(255,255,255,0.75); max-width: 440px; }
+.pp-cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.pp-cta .btn-outline-dark { color: #fff; border-color: rgba(255,255,255,0.5); }
+.pp-cta .btn-outline-dark:hover { background: #fff; color: var(--navy-dark); }
+
+/* The "construction assembly" 3D reveal (used with .reveal) */
+.build { transform: perspective(1200px) rotateX(22deg) translateY(60px) scale(0.94); transform-origin: 50% 100%; }
+.build.is-visible { transform: perspective(1200px) rotateX(0deg) translateY(0) scale(1); }
+
+@media (max-width: 900px) {
+  .pp-overview-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .pp-feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .pp-gallery { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .pp { padding-top: 64px; }
+  .pp-hero { height: 66svh; min-height: 360px; }
+  .pp-hero-inner { padding-bottom: 2.25rem; }
+  .pp-feature-grid { grid-template-columns: 1fr; }
+  .pp-gallery { grid-template-columns: 1fr; padding: 0 1.25rem; gap: 1rem; }
+  .pp-tile, .pp-tile:nth-child(6n+1) { grid-column: span 1; aspect-ratio: 4 / 3; }
+  /* Lighter 3D on phones */
+  .build { transform: translateY(30px) scale(0.97); }
+  .build.is-visible { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .build, .build.is-visible { transform: none; }
+  .pp-hero-media { transform: none !important; }
+}
