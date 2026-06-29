@@ -130,12 +130,15 @@ const storage = multer.diskStorage({
     cb(null, stamp + '-' + safe);
   }
 });
+const MAX_UPLOAD_MB = 1024; // 1 GB per file
 const upload = multer({
   storage,
-  limits: { fileSize: 200 * 1024 * 1024 }, // 200 MB (videos)
+  limits: { fileSize: MAX_UPLOAD_MB * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
-    if (/^image\//.test(file.mimetype) || /^video\//.test(file.mimetype)) cb(null, true);
-    else cb(new Error('Only image and video files are allowed.'));
+    const okMime = /^image\//.test(file.mimetype) || /^video\//.test(file.mimetype);
+    const okExt = /\.(jpe?g|png|gif|webp|avif|svg|bmp|heic|mp4|webm|mov|m4v|ogg|ogv|avi|mkv|3gp|m2ts)$/i.test(file.originalname);
+    if (okMime || okExt) cb(null, true);
+    else cb(new Error('Unsupported file type "' + (file.mimetype || file.originalname) + '". Use an image or video file.'));
   }
 });
 
@@ -262,7 +265,12 @@ app.post('/api/admin/discard', requireAuth, (req, res) => {
 /* ---------- Media ---------- */
 app.post('/api/admin/upload', requireAuth, (req, res) => {
   upload.single('file')(req, res, (err) => {
-    if (err) return res.status(400).json({ error: err.message });
+    if (err) {
+      const msg = err.code === 'LIMIT_FILE_SIZE'
+        ? 'That file is too large (max ' + MAX_UPLOAD_MB + ' MB). Please compress the video and try again.'
+        : err.message;
+      return res.status(400).json({ error: msg });
+    }
     if (!req.file) return res.status(400).json({ error: 'No file received' });
     res.json({
       ok: true,
