@@ -168,7 +168,7 @@
 
         <div class="carousel" id="projCarousel">
           <% c.projects.items.forEach(function(p){ %>
-          <article class="slide">
+          <a class="slide" href="/projects/<%= p.id %>" aria-label="<%= p.title %>">
             <div class="slide-img">
               <% if (p.video) { %>
               <video src="<%= p.video %>" muted loop playsinline autoplay poster="<%= p.image %>"></video>
@@ -177,8 +177,8 @@
               <% } %>
               <% if (p.status) { %><span class="slide-status"><%= p.status %></span><% } %>
             </div>
-            <div class="slide-body"><span class="slide-type"><%= p.type %></span><h3><%= p.title %></h3><p><%= p.description %></p><a href="#contact" class="slide-link">Enquire →</a></div>
-          </article>
+            <div class="slide-body"><span class="slide-type"><%= p.type %></span><h3><%= p.title %></h3><p><%= p.description %></p><span class="slide-link">View Project →</span></div>
+          </a>
           <% }); %>
         </div>
       </section>

@@ -156,6 +156,16 @@ app.get('/', (req, res) => {
   res.render('index', { c: content, preview: isPreview });
 });
 
+// Dedicated project page
+app.get('/projects/:id', (req, res) => {
+  const isPreview = req.query.preview === '1' && req.session.user;
+  const content = isPreview ? getDraft().content : getPublished().content;
+  const items = (content.projects && content.projects.items) || [];
+  const project = items.find((p) => p.id === req.params.id);
+  if (!project) return res.redirect('/#projects');
+  res.render('project', { c: content, project, preview: isPreview });
+});
+
 // JSON content API (handy for headless use)
 app.get('/api/content', (req, res) => res.json(getPublished().content));
 
