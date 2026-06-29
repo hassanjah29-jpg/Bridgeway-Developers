@@ -111,8 +111,31 @@
     updateArrows();
   }
 
-  /* ---------- Hero mute toggle ---------- */
+  /* ---------- Hero background video (robust autoplay on mobile) ---------- */
   var video = document.getElementById('heroVideo');
+  if (video) {
+    // Mobile browsers only autoplay muted, inline video — enforce both as
+    // properties (attributes alone aren't always enough on iOS/Android).
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    var tryPlayVideo = function () {
+      var p = video.play();
+      if (p && typeof p.catch === 'function') p.catch(function () {});
+    };
+    tryPlayVideo();
+    video.addEventListener('loadeddata', tryPlayVideo);
+    video.addEventListener('canplay', tryPlayVideo);
+    // Some mobile browsers block autoplay until the first user gesture.
+    document.addEventListener('touchstart', tryPlayVideo, { once: true, passive: true });
+    document.addEventListener('click', tryPlayVideo, { once: true });
+    // Mobile pauses background tabs — resume on return.
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) tryPlayVideo();
+    });
+  }
+
+  /* ---------- Hero mute toggle ---------- */
   var muteBtn = document.getElementById('heroMute');
   if (video && muteBtn) {
     muteBtn.addEventListener('click', function () {
