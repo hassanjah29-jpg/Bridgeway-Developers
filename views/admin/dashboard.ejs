@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard · Bridgeway Developers</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/admin/assets/admin.css" />
+  </head>
+  <body class="admin-body">
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <img src="/logo.png" alt="Bridgeway" class="sidebar-logo" />
+        <span>Admin Panel</span>
+      </div>
+      <nav class="side-nav" id="sideNav">
+        <button class="side-link active" data-tab="hero"><span class="ic">◧</span> Hero</button>
+        <button class="side-link" data-tab="about"><span class="ic">▤</span> About &amp; Stats</button>
+        <button class="side-link" data-tab="projects"><span class="ic">▦</span> Projects</button>
+        <button class="side-link" data-tab="services"><span class="ic">✦</span> Services</button>
+        <button class="side-link" data-tab="whyUs"><span class="ic">★</span> Why Us</button>
+        <button class="side-link" data-tab="process"><span class="ic">⇢</span> Process</button>
+        <button class="side-link" data-tab="testimonials"><span class="ic">❝</span> Testimonials</button>
+        <button class="side-link" data-tab="contact"><span class="ic">✉</span> Contact</button>
+        <button class="side-link" data-tab="footer"><span class="ic">▭</span> Footer</button>
+        <button class="side-link" data-tab="site"><span class="ic">⚙</span> Site &amp; SEO</button>
+        <button class="side-link" data-tab="media"><span class="ic">▣</span> Media Library</button>
+        <button class="side-link" data-tab="settings"><span class="ic">🔒</span> Settings</button>
+      </nav>
+      <form method="POST" action="/admin/logout" class="side-logout">
+        <button type="submit">Log out</button>
+      </form>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 id="tabTitle">Hero</h1>
+          <span class="status-pill" id="statusPill">Saved</span>
+        </div>
+        <div class="topbar-right">
+          <span class="pending-note" id="pendingNote"></span>
+          <a href="/?preview=1" target="_blank" class="btn-ghost">Preview Draft</a>
+          <button class="btn-ghost" id="discardBtn">Discard Changes</button>
+          <button class="btn-publish" id="publishBtn">
+            <span class="dot"></span> Publish to Site
+          </button>
+        </div>
+      </header>
+
+      <% if (isDefaultPassword) { %>
+      <div class="banner warn" id="pwBanner">
+        You're using the default password. <button type="button" data-goto="settings" class="link-btn">Change it now →</button>
+      </div>
+      <% } %>
+
+      <main class="panel" id="panel"><!-- section editors render here --></main>
+    </div>
+
+    <!-- toast -->
+    <div class="toast" id="toast" hidden></div>
+
+    <script>window.__USER__ = <%- JSON.stringify(user) %>;</script>
+    <script src="/admin/assets/admin.js"></script>
+  </body>
+</html>

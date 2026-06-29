@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login · Bridgeway Developers</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/admin/assets/admin.css" />
+  </head>
+  <body class="login-body">
+    <form class="login-card" method="POST" action="/admin/login">
+      <img src="/logo.png" alt="Bridgeway Developers" class="login-logo" />
+      <h1>Admin Panel</h1>
+      <p class="login-sub">Sign in to manage your website</p>
+      <% if (error) { %><div class="alert error"><%= error %></div><% } %>
+      <label>Username</label>
+      <input type="text" name="username" autocomplete="username" required autofocus />
+      <label>Password</label>
+      <input type="password" name="password" autocomplete="current-password" required />
+      <button type="submit" class="btn-primary full">Sign In</button>
+      <a href="/" class="login-back">← Back to website</a>
+    </form>
+  </body>
+</html>
