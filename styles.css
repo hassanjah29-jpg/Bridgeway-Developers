@@ -281,6 +281,8 @@ a { text-decoration: none; color: inherit; }
   background-image: radial-gradient(circle at 50% 48%, #14233b 0%, #0a1526 45%, #060d18 100%);
   animation: loaderHide 0.7s ease 3.4s forwards;
 }
+/* Returning visitor: don't play the intro loader at all (no flash). */
+.loader-seen .loader { display: none !important; }
 .loader-svg { width: clamp(240px, 46vw, 400px); height: auto; filter: drop-shadow(0 6px 30px rgba(212, 175, 55, 0.22)); }
 /* draw the monogram in with a left-to-right reveal */
 .loader-svg .logo-fill { clip-path: inset(0 100% 0 0); animation: drawWipe 1.7s cubic-bezier(0.7, 0, 0.3, 1) 0.25s forwards; }

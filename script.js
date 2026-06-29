@@ -4,13 +4,18 @@
 (function () {
   'use strict';
 
-  /* ---------- Intro loader (plays on every visit) ---------- */
+  /* ---------- Intro loader (plays only on a visitor's first visit) ---------- */
   var loader = document.getElementById('loader');
   if (loader) {
-    document.body.style.overflow = 'hidden';
-    setTimeout(function () { document.body.style.overflow = ''; }, 3900);
-    // remove from the DOM after it has faded out
-    setTimeout(function () { if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 4700);
+    if (document.documentElement.classList.contains('loader-seen')) {
+      // Seen before — remove immediately without playing or blocking scroll.
+      if (loader.parentNode) loader.parentNode.removeChild(loader);
+    } else {
+      document.body.style.overflow = 'hidden';
+      setTimeout(function () { document.body.style.overflow = ''; }, 3900);
+      // remove from the DOM after it has faded out
+      setTimeout(function () { if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 4700);
+    }
   }
 
   /* ---------- Navbar shadow + back-to-top on scroll ---------- */
