@@ -41,8 +41,9 @@
     clearTimeout(toast._t);
     toast._t = setTimeout(function () { toastEl.className = 'toast'; }, 2600);
   }
-  function api(method, url, body, isForm) {
+  function api(method, url, body, isForm, keepalive) {
     var opts = { method: method, headers: {} };
+    if (keepalive) opts.keepalive = true;
     if (body && !isForm) { opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
     if (body && isForm) opts.body = body;
     return fetch(url, opts).then(function (r) {
@@ -55,26 +56,37 @@
   }
 
   /* ---------------- save / publish ---------------- */
-  var saveTimer = null;
+  var saveTimer = null, pendingKey = null;
   function markDirty() {
     statusPill.textContent = 'Unsaved…';
     statusPill.className = 'status-pill dirty';
   }
   function scheduleSave(key) {
+    pendingKey = key;
     markDirty();
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(function () { saveSection(key); }, 600);
+    saveTimer = setTimeout(function () { saveSection(key); }, 500);
   }
   function saveSection(key) {
+    if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
+    pendingKey = null;
     statusPill.textContent = 'Saving…';
     statusPill.className = 'status-pill saving';
-    return api('PUT', '/api/admin/section/' + key, state.content[key]).then(function (res) {
+    // keepalive lets the save complete even if the page is refreshed/closed.
+    return api('PUT', '/api/admin/section/' + key, state.content[key], false, true).then(function (res) {
       state.pendingChanges = res.pendingChanges;
       statusPill.textContent = 'Saved';
       statusPill.className = 'status-pill';
       refreshPublishState();
     }).catch(function (e) { toast(e.message, 'err'); });
   }
+  // Flush any pending (debounced) edit immediately — before publish, tab hide, or unload.
+  function flushSave() {
+    if (pendingKey) return saveSection(pendingKey);
+    return Promise.resolve();
+  }
+  window.addEventListener('pagehide', flushSave);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) flushSave(); });
   function refreshPublishState() {
     if (state.pendingChanges) {
       publishBtn.disabled = false;
@@ -100,7 +112,8 @@
     if (publishBtn.disabled) return;
     publishBtn.disabled = true;
     publishBtn.textContent = 'Publishing…';
-    api('POST', '/api/admin/publish').then(function (res) {
+    // Make sure the latest edit is saved to the draft before publishing it.
+    flushSave().then(function () { return api('POST', '/api/admin/publish'); }).then(function (res) {
       state.pendingChanges = false;
       state.lastPublished = res.lastPublished;
       publishBtn.innerHTML = '<span class="dot"></span> Publish to Site';
