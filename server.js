@@ -310,6 +310,48 @@ app.post('/api/admin/upload', requireAuth, (req, res) => {
   });
 });
 
+/* ---------- Chunked upload (1MB pieces; avoids proxy upload timeouts) ---------- */
+const CHUNK_DIR = path.join(UPLOAD_DIR, '.chunks');
+try {
+  if (!fs.existsSync(CHUNK_DIR)) fs.mkdirSync(CHUNK_DIR, { recursive: true });
+  // Clear any leftover partial uploads from a previous run.
+  for (const f of fs.readdirSync(CHUNK_DIR)) { try { fs.unlinkSync(path.join(CHUNK_DIR, f)); } catch (e) {} }
+} catch (e) {}
+
+app.post('/api/admin/upload-chunk', requireAuth, express.raw({ type: '*/*', limit: '8mb' }), (req, res) => {
+  try {
+    const id = String(req.headers['x-upload-id'] || '').replace(/[^a-z0-9]/gi, '');
+    const index = parseInt(req.headers['x-chunk-index'], 10);
+    const total = parseInt(req.headers['x-total-chunks'], 10);
+    const fsize = parseInt(req.headers['x-file-size'], 10);
+    let name = 'file';
+    try { name = decodeURIComponent(String(req.headers['x-file-name'] || 'file')); } catch (e) {}
+    if (!id || isNaN(index) || isNaN(total)) return res.status(400).json({ error: 'Bad chunk metadata' });
+    if (fsize && fsize > MAX_UPLOAD_MB * 1024 * 1024) {
+      return res.status(400).json({ error: 'That file is too large (max ' + MAX_UPLOAD_MB + ' MB).' });
+    }
+    const okExt = /\.(jpe?g|png|gif|webp|avif|svg|bmp|heic|mp4|webm|mov|m4v|ogg|ogv|avi|mkv|3gp|m2ts)$/i.test(name);
+    if (!okExt) return res.status(400).json({ error: 'Unsupported file type. Use an image or video file.' });
+
+    const part = path.join(CHUNK_DIR, id + '.part');
+    if (index === 0) { try { fs.unlinkSync(part); } catch (e) {} }
+    fs.appendFileSync(part, req.body || Buffer.alloc(0));
+
+    if (index >= total - 1) {
+      const safe = name.toLowerCase().replace(/[^a-z0-9.]+/g, '-').replace(/-+/g, '-');
+      const stamp = Date.now().toString(36) + '-' + crypto.randomBytes(3).toString('hex');
+      const finalName = stamp + '-' + safe;
+      fs.renameSync(part, path.join(UPLOAD_DIR, finalName));
+      logUpload({ event: 'chunk-complete', name, finalName, total });
+      return res.json({ ok: true, url: '/uploads/' + finalName, name });
+    }
+    res.json({ ok: true, received: index + 1, total });
+  } catch (e) {
+    logUpload({ event: 'chunk-error', message: e.message });
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // Diagnostics: open this URL while logged in to see recent upload attempts.
 app.get('/api/admin/uploadlog', requireAuth, (req, res) => {
   let free = null;
