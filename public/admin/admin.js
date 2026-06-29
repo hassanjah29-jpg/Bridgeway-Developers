@@ -393,7 +393,15 @@
       el('div', { class: 'fld' }, [
         el('label', {}, ['Photo / Video Gallery (shown on the project page)']),
         gal,
-        el('label', { class: 'upload-btn', style: 'margin-top:8px;display:inline-block' }, ['⬆ Add gallery media', galUpload])
+        el('label', { class: 'upload-btn', style: 'margin-top:8px;display:inline-block' }, ['⬆ Upload photos / videos', galUpload]),
+        (function () {
+          var url = el('input', { type: 'text', placeholder: '…or paste an image / video URL', style: 'flex:1' });
+          var add = el('button', { class: 'mini-btn', onclick: function () {
+            var u = url.value.trim(); if (!u) return;
+            p.gallery.push(u); url.value = ''; paintGal(); scheduleSave('projects'); toast('Added to gallery', 'ok');
+          } }, ['Add']);
+          return el('div', { style: 'display:flex;gap:6px;margin-top:8px' }, [url, add]);
+        })()
       ])
     ]);
   }

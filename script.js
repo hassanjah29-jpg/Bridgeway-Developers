@@ -50,17 +50,36 @@
     });
   });
 
-  /* ---------- Scroll reveal ---------- */
-  var revealEls = document.querySelectorAll('.reveal');
+  /* ---------- Scroll reveal (reveals once, then stays put) ---------- */
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  function revealNow(el) { el.classList.add('is-visible'); }
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+        // Once revealed we unobserve, so it never animates back out.
+        if (entry.isIntersecting) { revealNow(entry.target); io.unobserve(entry.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-    revealEls.forEach(function (el) { io.observe(el); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) {
+      // Anything already in or above the viewport on load is shown immediately.
+      if (el.getBoundingClientRect().top < window.innerHeight) revealNow(el);
+      else io.observe(el);
+    });
   } else {
-    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    revealEls.forEach(revealNow);
+  }
+
+  /* ---------- 3D hover tilt on project cards (desktop pointers only) ---------- */
+  if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.slide').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = 'perspective(900px) rotateX(' + (-py * 7).toFixed(2) + 'deg) rotateY(' + (px * 9).toFixed(2) + 'deg) translateY(-8px)';
+      });
+      card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+    });
   }
 
   /* ---------- Animated stat counters ---------- */
