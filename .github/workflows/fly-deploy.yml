@@ -44,8 +44,10 @@ jobs:
       - name: Scale to one machine
         run: flyctl scale count 1 --yes
 
+      # 'immediate' replaces the single machine directly instead of a slow
+      # rolling health-check wait (which was dragging deploys past their timeout).
       - name: Deploy
-        run: flyctl deploy --remote-only --ha=false
+        run: flyctl deploy --remote-only --ha=false --strategy immediate --wait-timeout 180
 
       # Print live state so we can confirm the volume is attached to the machine.
       - name: Diagnostics (volumes + machines)
