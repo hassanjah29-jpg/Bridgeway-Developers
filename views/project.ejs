@@ -300,9 +300,11 @@
           }
           return null;
         }
-        function drawCover(img) {
+        // Contain-fit: show the WHOLE photo (no cropping), centered.
+        function drawContain(img) {
           var cw = canvas.width, ch = canvas.height, iw = img.naturalWidth, ih = img.naturalHeight;
-          var s = Math.max(cw / iw, ch / ih), w = iw * s, h = ih * s;
+          var s = Math.min(cw / iw, ch / ih), w = iw * s, h = ih * s;
+          ctx.clearRect(0, 0, cw, ch);
           ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
         }
         function draw(i, force) {
@@ -310,7 +312,7 @@
           if (i === current && !force) return;
           current = i;
           var img = nearest(i);
-          if (img) { drawCover(img); if (fallback) fallback.style.opacity = '0'; }
+          if (img) { drawContain(img); if (fallback) fallback.style.opacity = '0'; }
         }
         function resize() {
           var w = sticky.clientWidth, h = sticky.clientHeight;
