@@ -44,10 +44,13 @@ jobs:
       - name: Scale to one machine
         run: flyctl scale count 1 --yes
 
-      # 'immediate' replaces the single machine directly instead of a slow
-      # rolling health-check wait (which was dragging deploys past their timeout).
+      # Build the image LOCALLY on the GitHub runner (which has Docker) and push
+      # it to Fly's registry. This bypasses Fly's remote "depot builder", which
+      # has been unreachable ("Waiting for depot builder..." -> context deadline
+      # exceeded) and was the real cause of the 10-minute hangs. 'immediate'
+      # replaces the single machine directly instead of a slow health-check wait.
       - name: Deploy
-        run: flyctl deploy --remote-only --ha=false --strategy immediate --wait-timeout 180
+        run: flyctl deploy --local-only --ha=false --strategy immediate --wait-timeout 180
 
       # Print live state so we can confirm the volume is attached to the machine.
       - name: Diagnostics (volumes + machines)
