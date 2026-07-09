@@ -1,10 +1,11 @@
 name: Deploy to Fly.io
 
-# Auto-deploys to Fly.io on every push to main.
+# Auto-deploys to Fly.io on every push to main; also manually triggerable.
 on:
   push:
     branches:
       - main
+  workflow_dispatch: {}
 
 jobs:
   deploy:
