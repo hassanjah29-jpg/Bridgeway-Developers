@@ -59,3 +59,26 @@ jobs:
           echo "===== VOLUMES ====="; flyctl volumes list || true
           echo "===== MACHINES ====="; flyctl machine list || true
           echo "===== STATUS ====="; flyctl status || true
+
+      # Fetch the LIVE homepage and report exactly what the running server sends
+      # (HTTP status, cache header, and which logo path is embedded). This is the
+      # ground truth for what a browser receives.
+      - name: Verify live homepage
+        if: always()
+        run: |
+          sleep 15
+          URL="https://bridgeway-developers-n9ggda.fly.dev/"
+          echo "GET $URL"
+          code=$(curl -s -o live.html -w "%{http_code}" "$URL" || echo 000)
+          echo "HTTP status: $code"
+          echo "--- cache-control header ---"
+          curl -sI "$URL" | grep -i "cache-control" || echo "(none)"
+          echo "--- logo path marker in served HTML ---"
+          if grep -oq 'd="M 76 28.905' live.html; then
+            echo "OPEN-W logo IS being served (new traced path)."
+          elif grep -oq 'd="M 57.500 22.959' live.html; then
+            echo "OLD filled logo is still being served."
+          else
+            echo "logo path marker not found; first nav-logo snippet:"
+            grep -o 'nav-logo[^>]*' live.html | head -1 || true
+          fi
