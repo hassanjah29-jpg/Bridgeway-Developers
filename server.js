@@ -172,6 +172,15 @@ for (const f of ['styles.css', 'script.js', 'logo.png', 'favicon.svg', 'hero-vid
 /* ===================================================================
    PUBLIC SITE  (rendered from PUBLISHED content; ?preview=1 = draft)
    =================================================================== */
+// Rendered HTML embeds content (and the inline logo) directly, so it must
+// always be revalidated — otherwise browsers (esp. mobile) keep serving a
+// stale page after a publish/logo change. ETag still yields 304s when nothing
+// actually changed, so this stays cheap.
+app.use(['/', '/projects'], (req, res, next) => {
+  res.set('Cache-Control', 'no-cache, must-revalidate');
+  next();
+});
+
 app.get('/', (req, res) => {
   const isPreview = req.query.preview === '1' && req.session.user;
   const content = isPreview ? getDraft().content : getPublished().content;
